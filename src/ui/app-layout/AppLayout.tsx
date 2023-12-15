@@ -1,4 +1,8 @@
-import Drawer from "@mui/material/Drawer";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -9,39 +13,57 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 
-import { EmployeeIcon, ClipboardListIcon } from "../../public/assets/icons";
+import { EmployeeIcon, ClipboardListIcon } from "../../../public/assets/icons";
+
+import {
+  appLayoutStyles,
+  StyledDrawer,
+  Root,
+  StyledListItemButton,
+  StyledListItemText,
+  StyledAppBar,
+} from "./AppLayout.styles";
 
 function AppLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const pathname = usePathname();
+
   return (
-    <Box>
+    <Root>
       {/* app bar */}
-      <AppBar sx={{ background: "#fafafa" }}>
+      <StyledAppBar elevation={0}>
         <Toolbar>
           <Typography color="textSecondary">SALAM</Typography>
           <Typography color="textSecondary">Farid Guluzade</Typography>
           <Avatar src="/avatar.png" />
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
 
       {/* Sidebar */}
-      <Drawer variant="permanent" anchor="left">
+      <StyledDrawer variant="permanent" anchor="left">
         <List>
-          <ListItemButton>
+          <StyledListItemButton
+            $isActive={pathname === "/dashboard"}
+            onClick={() => router.push("/dashboard")}
+          >
             <ListItemIcon>
               <EmployeeIcon />
             </ListItemIcon>
-            <ListItemText primary="Employess" />
-          </ListItemButton>
+            <StyledListItemText disableTypography={true} primary="Employess" />
+          </StyledListItemButton>
           <ListItemButton>
             <ListItemIcon>
               <ClipboardListIcon />
             </ListItemIcon>
-            <ListItemText primary="Checklist" />
+            <StyledListItemText primary="Checklist" />
           </ListItemButton>
         </List>
-      </Drawer>
-      {children}
-    </Box>
+      </StyledDrawer>
+      <Box sx={appLayoutStyles.page}>
+        <Box sx={appLayoutStyles.toolbar}></Box>
+        {children}
+      </Box>
+    </Root>
   );
 }
 
