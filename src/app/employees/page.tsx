@@ -1,5 +1,5 @@
 function page() {
-  return <h3>DASHBOARD</h3>;
+  return <h3>EMPLOYEES</h3>;
 }
 
 export default page;

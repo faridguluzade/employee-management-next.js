@@ -4,18 +4,28 @@ import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material/styles";
 import { NextAppDirEmotionCacheProvider } from "./EmotionCache";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { Roboto } from "next/font/google";
-import { amber, deepOrange, grey } from "@mui/material/colors";
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-});
+import { deepOrange, grey } from "@mui/material/colors";
 
 const mode = "light";
 
 const themeOptions: ThemeOptions = {
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          fontSize: "14px",
+          padding: "12px 18px",
+          textTransform: "capitalize",
+          fontWeight: 700,
+        },
+      },
+    },
+  },
+  shape: {
+    borderRadius: 10,
+  },
   typography: {
     fontFamily: "Manrope",
     fontSize: 16,
@@ -24,16 +34,16 @@ const themeOptions: ThemeOptions = {
     fontWeightMedium: 600,
     fontWeightBold: 700,
   },
-
   palette: {
     mode,
     ...(mode === "light"
       ? {
           // palette values for light mode
           primary: {
-            main: "#07713e",
-            light: "#388d64",
-            dark: "#044f2b",
+            main: "#0CAF60",
+            light: "#3cbf7f",
+            dark: "#087a43",
+            contrastText: "#fff",
           },
           text: {
             primary: "#111827",

@@ -2,14 +2,28 @@ import { EmployeeIcon, ClipboardListIcon } from "../../public/assets/icons";
 
 type MenuItem = {
   text: string;
-  icon: React.ReactNode;
   path: string;
 };
 
-const menuItems: MenuItem[] = [
+export const menuItems: MenuItem[] = [
   {
     text: "Employees",
-    icon: <EmployeeIcon />,
     path: "/employees",
+  },
+  {
+    text: "Checklist",
+    path: "/checklist",
+  },
+  {
+    text: "Time Off",
+    path: "/time-off",
+  },
+  {
+    text: "Attendance",
+    path: "/attendance",
+  },
+  {
+    text: "Setting",
+    path: "/setting",
   },
 ];
