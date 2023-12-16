@@ -2,8 +2,9 @@
 
 import Box from "@mui/material/Box";
 
-import Header from "../Header";
-import Sidebar from "../Sidebar";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import { grey } from "@mui/material/colors";
 
 function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,8 +15,8 @@ function AppLayout({ children }: { children: React.ReactNode }) {
       <Box
         sx={{
           width: "100%",
-          background: (theme) => theme.palette.grey[50],
-          padding: (theme) => theme.spacing(3),
+          background: grey[50],
+          padding: "32px",
         }}
       >
         <Box sx={(theme) => theme.mixins.toolbar}></Box>

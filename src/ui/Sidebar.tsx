@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 
 import { EmployeeIcon, LayoutGridIcon } from "../../public/assets/icons";
-import { menuItems } from "<src>/constants";
+import { menuItems } from "@/constants";
 import { useState } from "react";
 
 function Sidebar() {
@@ -46,7 +46,7 @@ function Sidebar() {
       <Button
         variant="contained"
         size="small"
-        color="primary"
+        color="success"
         sx={{
           margin: "24px 0",
         }}
