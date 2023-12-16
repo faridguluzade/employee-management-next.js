@@ -1,11 +1,13 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 
 import Heading from "@/ui/Heading";
 import Select from "@/ui/Select";
 
-import { PlusIcon } from "../../../public/assets/icons";
+import { PlusIcon, SearchIcon } from "../../../public/assets/icons";
+import EmployeeTable from "@/features/employees/EmployeeTable";
 
 const statusArr = [
   { label: "All Status", value: "All Status" },
@@ -40,6 +42,13 @@ function Employees() {
             label="Search Employee"
             variant="outlined"
             fullWidth
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid xs={2}>
@@ -52,6 +61,8 @@ function Employees() {
           <Select label="Status" options={statusArr} />
         </Grid>
       </Grid>
+
+      <EmployeeTable />
     </Grid>
   );
 }

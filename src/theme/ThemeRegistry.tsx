@@ -69,9 +69,9 @@ const themeOptions: ThemeOptions = {
     greyScale: createColor("#111827"),
     // palette values for light mode
     primary: {
-      main: "#0CAF60",
-      light: "#3cbf7f",
-      dark: "#087a43",
+      main: "#111827",
+      light: "#687588",
+      dark: "#A0AEC0",
       contrastText: "#fff",
     },
     text: {
