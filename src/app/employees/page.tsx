@@ -35,7 +35,7 @@ function Employees() {
         </Grid>
       </Grid>
 
-      <Grid container direction="row">
+      <Grid container direction="row" spacing={2}>
         <Grid xs={6}>
           <TextField
             id="outlined-basic"
@@ -62,7 +62,9 @@ function Employees() {
         </Grid>
       </Grid>
 
-      <EmployeeTable />
+      <Grid>
+        <EmployeeTable />
+      </Grid>
     </Grid>
   );
 }

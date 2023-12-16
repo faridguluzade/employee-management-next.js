@@ -9,8 +9,6 @@ import {
 import { NextAppDirEmotionCacheProvider } from "./EmotionCache";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { deepOrange, grey } from "@mui/material/colors";
-
 declare module "@mui/material/styles" {
   interface CustomPalette {
     greyScale: PaletteColorOptions;
@@ -33,20 +31,6 @@ const createColor = (mainColor: any) =>
 const mode = "light";
 
 const themeOptions: ThemeOptions = {
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        // Name of the slot
-        root: {
-          // Some CSS
-          fontSize: "14px",
-          padding: "12px 18px",
-          textTransform: "capitalize",
-          fontWeight: 700,
-        },
-      },
-    },
-  },
   shape: {
     borderRadius: 10,
   },
@@ -84,6 +68,65 @@ const themeOptions: ThemeOptions = {
       light: "#3cbf7f",
       dark: "#087a43",
       contrastText: "#fff",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          fontSize: "14px",
+          padding: "12px 18px",
+          textTransform: "capitalize",
+          fontWeight: 700,
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiInputBase-input": {
+            fontSize: "14px", // Set the font size for the input value
+          },
+          "& .MuiInputLabel-root": {
+            fontSize: "14px",
+            color: "#A0AEC0",
+            // Set the font size for the label (which also affects the placeholder)
+          },
+
+          background: "#fff",
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          "& .MuiSelect-select": {
+            fontSize: "14px", // Set the font size for the select value
+            padding: "13px", // Adjust the padding for the select value
+          },
+          "& .MuiSelect-icon": {
+            top: "calc(50% - 12px)", // Adjust the vertical alignment of the select icon
+          },
+          background: "#fff",
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: "14px", // Set the font size for the InputLabel
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: "14px", // Set the font size for the MenuItem
+          // Add any other styles you want to customize for MenuItem
+        },
+      },
     },
   },
 };
