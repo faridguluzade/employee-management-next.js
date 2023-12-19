@@ -14,108 +14,13 @@ import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-import { EyeIcon, TrashIcon, EditIcon } from "../../../public/assets/icons";
+import { EyeIcon, TrashIcon, EditIcon } from "../../public/assets/icons";
 
-interface Data {
-  id: number;
-  employeeName: string;
-  employeeEmail: string;
-  employeeImage: string;
-  jobTitle: string;
-  lineManager: string;
-  departament: string;
-  office: string;
-  employeeStatus: string;
-  account: string;
-  selected: boolean;
-}
-
-const mockData: Data[] = [
-  {
-    id: 1,
-    employeeName: "John Doe",
-    employeeEmail: "john.doe@company.com",
-    employeeImage: "https://example.com/image1.jpg",
-    jobTitle: "Software Engineer",
-    lineManager: "Manager 1",
-    departament: "Engineering",
-    office: "Office 1",
-    employeeStatus: "Active",
-    account: "Account 1",
-    selected: false,
-  },
-  {
-    id: 2,
-    employeeName: "Jane Doe",
-    employeeEmail: "jane.doe@company.com",
-    employeeImage: "https://example.com/image2.jpg",
-    jobTitle: "Product Manager",
-    lineManager: "Manager 2",
-    departament: "Product Management",
-    office: "Office 2",
-    employeeStatus: "Inactive",
-    account: "Account 2",
-    selected: false,
-  },
-  {
-    id: 3,
-    employeeName: "Jane Doe",
-    employeeEmail: "jane.doe@company.com",
-    employeeImage: "https://example.com/image2.jpg",
-    jobTitle: "Product Manager",
-    lineManager: "Manager 2",
-    departament: "Product Management",
-    office: "Office 2",
-    employeeStatus: "On Boarding",
-    account: "Account 2",
-    selected: false,
-  },
-  {
-    id: 4,
-    employeeName: "Jane Doe",
-    employeeEmail: "jane.doe@company.com",
-    employeeImage: "https://example.com/image2.jpg",
-    jobTitle: "Product Manager",
-    lineManager: "Manager 2",
-    departament: "Product Management",
-    office: "Office 2",
-    employeeStatus: "Probation",
-    account: "Account 2",
-    selected: false,
-  },
-  {
-    id: 5,
-    employeeName: "Jane Doe",
-    employeeEmail: "jane.doe@company.com",
-    employeeImage: "https://example.com/image2.jpg",
-    jobTitle: "Product Manager",
-    lineManager: "Manager 2",
-    departament: "Product Management",
-    office: "Office 2",
-    employeeStatus: "On Leave",
-    account: "Account 2",
-    selected: false,
-  },
-];
-interface Column {
-  id: keyof Data;
-  label: string;
-}
-
-const columns: Column[] = [
-  { id: "employeeName", label: "Employee Name" },
-  { id: "jobTitle", label: "Job Title" },
-  { id: "lineManager", label: "Line Manager" },
-  { id: "departament", label: "Departament" },
-  { id: "office", label: "Office" },
-  { id: "employeeStatus", label: "Employee Status" },
-  { id: "account", label: "Account" },
-];
-const EmployeeTable: React.FC = () => {
-  const [data, setData] = useState<Data[]>([]);
+const Table: React.FC = ({ columns }: { columns: any }) => {
+  const [data, setData] = useState<any[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [orderBy, setOrderBy] = useState<keyof Data>("id");
+  const [orderBy, setOrderBy] = useState<keyof any>("id");
   const [order, setOrder] = useState<"asc" | "desc">("asc");
   const [allSelected, setAllSelected] = useState(false);
 
@@ -177,11 +82,8 @@ const EmployeeTable: React.FC = () => {
                   onChange={handleToggleSelectAll}
                 />
               </TableCell>
-              {columns.map((column) => (
-                <TableCell
-                  sx={{ color: "#687588", fontWeight: 700 }}
-                  key={column.id}
-                >
+              {columns.map((column: any) => (
+                <TableCell key={column.id}>
                   <TableSortLabel
                     active={orderBy === column.id}
                     direction={orderBy === column.id ? order : "asc"}
@@ -191,12 +93,7 @@ const EmployeeTable: React.FC = () => {
                   </TableSortLabel>
                 </TableCell>
               ))}
-              <TableCell
-                sx={{ color: "#687588", fontWeight: 700 }}
-                align="center"
-              >
-                Action
-              </TableCell>
+              <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -215,28 +112,15 @@ const EmployeeTable: React.FC = () => {
                       {row[column.id]}
                     </TableCell>
                   ))}
-
-                  <TableCell>
+                  <TableCell align="right">
                     <Stack direction="row" spacing={1}>
-                      <Button
-                        sx={{ padding: "10px" }}
-                        variant="contained"
-                        color="success"
-                      >
+                      <Button variant="contained" color="success">
                         <EyeIcon />
                       </Button>
-                      <Button
-                        sx={{ padding: "10px" }}
-                        variant="contained"
-                        color="info"
-                      >
+                      <Button variant="contained" color="info">
                         <EditIcon />
                       </Button>
-                      <Button
-                        sx={{ padding: "10px" }}
-                        variant="contained"
-                        color="error"
-                      >
+                      <Button variant="contained" color="error">
                         <TrashIcon />
                       </Button>
                     </Stack>
@@ -259,4 +143,4 @@ const EmployeeTable: React.FC = () => {
   );
 };
 
-export default EmployeeTable;
+export default Table;

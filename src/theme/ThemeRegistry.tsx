@@ -36,7 +36,7 @@ const themeOptions: ThemeOptions = {
   },
   typography: {
     fontFamily: "Manrope",
-    fontSize: 16,
+    fontSize: 14,
     fontWeightLight: 400,
     fontWeightRegular: 500,
     fontWeightMedium: 600,
@@ -69,6 +69,12 @@ const themeOptions: ThemeOptions = {
       dark: "#087a43",
       contrastText: "#fff",
     },
+    info: {
+      main: "#2F78EE",
+    },
+    error: {
+      main: "#E03137",
+    },
   },
   components: {
     MuiButton: {
@@ -76,10 +82,10 @@ const themeOptions: ThemeOptions = {
         // Name of the slot
         root: {
           // Some CSS
-          fontSize: "14px",
           padding: "12px 18px",
           textTransform: "capitalize",
           fontWeight: 700,
+          minWidth: 0,
         },
       },
     },
@@ -87,12 +93,10 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           "& .MuiInputBase-input": {
-            fontSize: "14px", // Set the font size for the input value
+            fontSize: "14px",
           },
           "& .MuiInputLabel-root": {
-            fontSize: "14px",
             color: "#A0AEC0",
-            // Set the font size for the label (which also affects the placeholder)
           },
 
           background: "#fff",
@@ -104,7 +108,7 @@ const themeOptions: ThemeOptions = {
         root: {
           "& .MuiSelect-select": {
             fontSize: "14px", // Set the font size for the select value
-            padding: "13px", // Adjust the padding for the select value
+            padding: "15px", // Adjust the padding for the select value
           },
           "& .MuiSelect-icon": {
             top: "calc(50% - 12px)", // Adjust the vertical alignment of the select icon
@@ -116,15 +120,14 @@ const themeOptions: ThemeOptions = {
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          fontSize: "14px", // Set the font size for the InputLabel
+          fontSize: "14px",
         },
       },
     },
     MuiMenuItem: {
       styleOverrides: {
         root: {
-          fontSize: "14px", // Set the font size for the MenuItem
-          // Add any other styles you want to customize for MenuItem
+          fontSize: "14px",
         },
       },
     },
