@@ -12,107 +12,21 @@ import TablePagination from "@mui/material/TablePagination";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 
-import { EyeIcon, TrashIcon, EditIcon } from "../../../public/assets/icons";
+import { ITable, Data } from "@/interfaces";
+import { Avatar, Box, Typography } from "@mui/material";
+import Actions from "@/ui/Actions";
 
-interface Data {
-  id: number;
-  employeeName: string;
-  employeeEmail: string;
-  employeeImage: string;
-  jobTitle: string;
-  lineManager: string;
-  departament: string;
-  office: string;
-  employeeStatus: string;
-  account: string;
-  selected: boolean;
-}
+import { purple, amber, red, green } from "@mui/material/colors";
 
-const mockData: Data[] = [
-  {
-    id: 1,
-    employeeName: "John Doe",
-    employeeEmail: "john.doe@company.com",
-    employeeImage: "https://example.com/image1.jpg",
-    jobTitle: "Software Engineer",
-    lineManager: "Manager 1",
-    departament: "Engineering",
-    office: "Office 1",
-    employeeStatus: "Active",
-    account: "Account 1",
-    selected: false,
-  },
-  {
-    id: 2,
-    employeeName: "Jane Doe",
-    employeeEmail: "jane.doe@company.com",
-    employeeImage: "https://example.com/image2.jpg",
-    jobTitle: "Product Manager",
-    lineManager: "Manager 2",
-    departament: "Product Management",
-    office: "Office 2",
-    employeeStatus: "Inactive",
-    account: "Account 2",
-    selected: false,
-  },
-  {
-    id: 3,
-    employeeName: "Jane Doe",
-    employeeEmail: "jane.doe@company.com",
-    employeeImage: "https://example.com/image2.jpg",
-    jobTitle: "Product Manager",
-    lineManager: "Manager 2",
-    departament: "Product Management",
-    office: "Office 2",
-    employeeStatus: "On Boarding",
-    account: "Account 2",
-    selected: false,
-  },
-  {
-    id: 4,
-    employeeName: "Jane Doe",
-    employeeEmail: "jane.doe@company.com",
-    employeeImage: "https://example.com/image2.jpg",
-    jobTitle: "Product Manager",
-    lineManager: "Manager 2",
-    departament: "Product Management",
-    office: "Office 2",
-    employeeStatus: "Probation",
-    account: "Account 2",
-    selected: false,
-  },
-  {
-    id: 5,
-    employeeName: "Jane Doe",
-    employeeEmail: "jane.doe@company.com",
-    employeeImage: "https://example.com/image2.jpg",
-    jobTitle: "Product Manager",
-    lineManager: "Manager 2",
-    departament: "Product Management",
-    office: "Office 2",
-    employeeStatus: "On Leave",
-    account: "Account 2",
-    selected: false,
-  },
-];
-interface Column {
-  id: keyof Data;
-  label: string;
-}
-
-const columns: Column[] = [
-  { id: "employeeName", label: "Employee Name" },
-  { id: "jobTitle", label: "Job Title" },
-  { id: "lineManager", label: "Line Manager" },
-  { id: "departament", label: "Departament" },
-  { id: "office", label: "Office" },
-  { id: "employeeStatus", label: "Employee Status" },
-  { id: "account", label: "Account" },
-];
-const EmployeeTable: React.FC = () => {
-  const [data, setData] = useState<Data[]>([]);
+const EmployeeTable: React.FC<ITable> = ({
+  data,
+  columns,
+  selection,
+  pagination,
+  action,
+}) => {
+  const [newData, setNewData] = useState<Data[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState<keyof Data>("id");
@@ -121,7 +35,7 @@ const EmployeeTable: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setData(mockData);
+      setNewData(data);
     };
 
     fetchData();
@@ -134,7 +48,7 @@ const EmployeeTable: React.FC = () => {
   };
 
   const handleToggleSelect = (id: number) => {
-    setData((prevData) =>
+    setNewData((prevData) =>
       prevData.map((item) =>
         item.id === id ? { ...item, selected: !item.selected } : item
       )
@@ -143,7 +57,7 @@ const EmployeeTable: React.FC = () => {
 
   const handleToggleSelectAll = () => {
     setAllSelected(!allSelected);
-    setData((prevData) =>
+    setNewData((prevData) =>
       prevData.map((item) => ({
         ...item,
         selected: !allSelected,
@@ -162,21 +76,30 @@ const EmployeeTable: React.FC = () => {
     setPage(0);
   };
 
+  const statusToTagName: any = {
+    active: green,
+    probation: purple,
+    "on-boarding": amber,
+    "on-leave": red,
+  };
+
   return (
     <Paper>
       <TableContainer>
         <MuiTable>
           <TableHead>
             <TableRow>
-              <TableCell>
-                <Checkbox
-                  indeterminate={
-                    !allSelected && data.some((row) => row.selected)
-                  }
-                  checked={allSelected}
-                  onChange={handleToggleSelectAll}
-                />
-              </TableCell>
+              {selection && (
+                <TableCell>
+                  <Checkbox
+                    indeterminate={
+                      !allSelected && newData.some((row) => row.selected)
+                    }
+                    checked={allSelected}
+                    onChange={handleToggleSelectAll}
+                  />
+                </TableCell>
+              )}
               {columns.map((column) => (
                 <TableCell
                   sx={{ color: "#687588", fontWeight: 700 }}
@@ -191,70 +114,95 @@ const EmployeeTable: React.FC = () => {
                   </TableSortLabel>
                 </TableCell>
               ))}
-              <TableCell
-                sx={{ color: "#687588", fontWeight: 700 }}
-                align="center"
-              >
-                Action
-              </TableCell>
+              {action && (
+                <TableCell
+                  sx={{ color: "#687588", fontWeight: 700 }}
+                  align="center"
+                >
+                  Action
+                </TableCell>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>
-            {data
+            {newData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell>
-                    <Checkbox
-                      checked={row.selected}
-                      onChange={() => handleToggleSelect(row.id)}
-                    />
-                  </TableCell>
-                  {columns.map((column) => (
-                    <TableCell align="left" key={column.id}>
-                      {row[column.id]}
+                  {selection && (
+                    <TableCell>
+                      <Checkbox
+                        checked={row.selected}
+                        onChange={() => handleToggleSelect(row.id)}
+                      />
                     </TableCell>
-                  ))}
-
-                  <TableCell>
-                    <Stack direction="row" spacing={1}>
-                      <Button
-                        sx={{ padding: "10px" }}
-                        variant="contained"
-                        color="success"
-                      >
-                        <EyeIcon />
-                      </Button>
-                      <Button
-                        sx={{ padding: "10px" }}
-                        variant="contained"
-                        color="info"
-                      >
-                        <EditIcon />
-                      </Button>
-                      <Button
-                        sx={{ padding: "10px" }}
-                        variant="contained"
-                        color="error"
-                      >
-                        <TrashIcon />
-                      </Button>
-                    </Stack>
+                  )}
+                  {/* {columns.map((column) => ( */}
+                  {/* ))} */}
+                  <TableCell align="left">
+                    {
+                      <Stack direction="row" spacing={1}>
+                        <Avatar src="/avatar.png" />
+                        <Box>
+                          <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                            {row.employeeName}
+                          </Typography>
+                          <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            display="block"
+                          >
+                            {row.employeeEmail}
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    }
                   </TableCell>
+                  <TableCell>{row.jobTitle}</TableCell>
+                  <TableCell>{row.lineManager}</TableCell>
+                  <TableCell>{row.departament}</TableCell>
+                  <TableCell>{row.office}</TableCell>
+                  <TableCell align="center">
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        background: statusToTagName[row.employeeStatus][50],
+                        width: "114px",
+                        padding: "4px 16px",
+                        color: statusToTagName[row.employeeStatus][600],
+                        fontWeight: 700,
+                        borderRadius: "8px",
+                        textAlign: "center",
+                        textTransform: "uppercase",
+                        fontSize: "12px",
+                      }}
+                    >
+                      {row.employeeStatus.replace("-", " ")}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>{row.account}</TableCell>
+
+                  {action && (
+                    <TableCell align="center">
+                      <Actions />
+                    </TableCell>
+                  )}
                 </TableRow>
               ))}
           </TableBody>
         </MuiTable>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      {pagination && (
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={newData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      )}
     </Paper>
   );
 };
