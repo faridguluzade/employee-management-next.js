@@ -37,7 +37,27 @@ const themeOptions: ThemeOptions = {
     fontWeightMedium: 600,
     fontWeightBold: 700,
     h1: {
+      fontSize: 48,
+      fontWeight: 700,
+    },
+    h2: {
+      fontSize: 40,
+      fontWeight: 700,
+    },
+    h3: {
+      fontSize: 32,
+      fontWeight: 700,
+    },
+    h4: {
       fontSize: 24,
+      fontWeight: 700,
+    },
+    h5: {
+      fontSize: 20,
+      fontWeight: 700,
+    },
+    h6: {
+      fontSize: 18,
       fontWeight: 700,
     },
     subtitle1: {

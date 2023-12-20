@@ -39,5 +39,8 @@ export interface ISidebar {
     bottom: boolean;
     right: boolean;
   };
-  toggleDrawer: (anchor: Anchor, open: boolean) => {};
+  toggleSidebar: (
+    anchor: Anchor,
+    open: boolean
+  ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
 }

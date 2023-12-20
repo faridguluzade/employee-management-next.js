@@ -1,38 +1,66 @@
 "use client";
 
 import React, { useState } from "react";
-import { Drawer, Button, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Drawer,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  TextField,
+  Stack,
+} from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+import { useSidebar } from "@/context/SidebarContext";
 
-  const toggleDrawer = (open: any) => (event: any) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setIsOpen(open);
-  };
+const AddEmployee = () => {
+  const { isOpen, toggleSidebar } = useSidebar();
 
   return (
     <div>
-      {/* <Button onClick={toggleDrawer(true)}>Open Sidebar</Button> */}
-      <Drawer anchor="right" open={isOpen} onClose={toggleDrawer(false)}>
-        <List>
-          <ListItem button>
-            <ListItemText primary="Item 1" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Item 2" />
-          </ListItem>
-          {/* Add more ListItems as needed */}
-        </List>
+      <Drawer
+        anchor="right"
+        open={isOpen["employee"]}
+        onClose={toggleSidebar("employee", false)}
+        sx={{
+          width: "396px",
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: "396px",
+            padding: "36px",
+          },
+        }}
+      >
+        <Typography variant="h4">Add New Profile</Typography>
+        <Stack marginTop={4} spacing={4}>
+          <TextField required type="text" label="First Name" />
+          <TextField required type="text" label="Last Name" />
+          <TextField required type="email" label="Email Address" />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker />
+          </LocalizationProvider>
+        </Stack>
+
+        <Stack
+          direction="row"
+          spacing={3}
+          sx={{ marginTop: "auto", justifyContent: "center" }}
+        >
+          <Button onClick={toggleSidebar("employee", false)} variant="outlined">
+            Cancel
+          </Button>
+
+          <Button color="greyScale" variant="contained">
+            Create
+          </Button>
+        </Stack>
       </Drawer>
     </div>
   );
 };
 
-export default Sidebar;
+export default AddEmployee;

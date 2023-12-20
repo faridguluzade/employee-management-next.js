@@ -13,7 +13,7 @@ function SidebarProvider({ children }: { children: React.ReactNode }) {
     right: false,
   });
 
-  const toggleDrawer =
+  const toggleSidebar =
     (anchor: Anchor, open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -27,9 +27,11 @@ function SidebarProvider({ children }: { children: React.ReactNode }) {
       setIsOpen({ ...isOpen, [anchor]: open });
     };
 
-  <SidebarContext.Provider value={{ isOpen, toggleDrawer }}>
-    {children}
-  </SidebarContext.Provider>;
+  return (
+    <SidebarContext.Provider value={{ isOpen, toggleSidebar }}>
+      {children}
+    </SidebarContext.Provider>
+  );
 }
 
 function useSidebar() {

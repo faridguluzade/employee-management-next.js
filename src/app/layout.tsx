@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import ThemeRegistry from "@/theme/ThemeRegistry";
+import { SidebarProvider } from "@/context/SidebarContext";
 import AppLayout from "@/ui/AppLayout";
+import ThemeRegistry from "@/theme/ThemeRegistry";
 
 export const metadata: Metadata = {
   title: "Humanline - Employee Management",
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeRegistry>
-        <body>
-          <AppLayout>{children}</AppLayout>
-        </body>
+        <SidebarProvider>
+          <body>
+            <AppLayout>{children}</AppLayout>
+          </body>
+        </SidebarProvider>
       </ThemeRegistry>
     </html>
   );
