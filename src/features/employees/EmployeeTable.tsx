@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+
 import MuiTable from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,11 +13,13 @@ import TablePagination from "@mui/material/TablePagination";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { ITable, Data } from "@/interfaces";
-import { Avatar, Box, Typography } from "@mui/material";
 import Actions from "@/ui/Actions";
 
+import { ITable, Data } from "@/interfaces";
 import { purple, amber, red, green } from "@mui/material/colors";
 
 const EmployeeTable: React.FC<ITable> = ({

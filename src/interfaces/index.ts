@@ -20,7 +20,7 @@ export interface Data {
 export interface Column {
   id: keyof Data;
   label: string;
-  render: (row: any) => React.ReactNode;
+  // render: (row: any) => React.ReactNode;
 }
 
 export interface ITable {
