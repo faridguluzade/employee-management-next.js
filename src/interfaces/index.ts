@@ -30,3 +30,14 @@ export interface ITable {
   pagination?: boolean;
   action?: boolean;
 }
+
+export type Anchor = "employee" | "left" | "bottom" | "right";
+export interface ISidebar {
+  isOpen: {
+    employee: boolean;
+    left: boolean;
+    bottom: boolean;
+    right: boolean;
+  };
+  toggleDrawer: (anchor: Anchor, open: boolean) => {};
+}
