@@ -32,7 +32,8 @@ export interface ITable {
 }
 
 export type Anchor = "employee" | "left" | "bottom" | "right";
-export interface ISidebar {
+
+export interface ISidebarContext {
   isOpen: {
     employee: boolean;
     left: boolean;
@@ -43,4 +44,10 @@ export interface ISidebar {
     anchor: Anchor,
     open: boolean
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+}
+
+export interface ISidebar {
+  heading: string;
+  children: React.ReactNode;
+  anchor: Anchor;
 }

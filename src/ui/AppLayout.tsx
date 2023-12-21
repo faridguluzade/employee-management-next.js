@@ -4,13 +4,13 @@ import Box from "@mui/material/Box";
 import { grey } from "@mui/material/colors";
 
 import Header from "./Header";
-import Sidebar from "./Sidebar";
+import SideNavbar from "./SideNavbar";
 
 function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <Box sx={{ display: "flex" }}>
       <Header />
-      <Sidebar />
+      <SideNavbar />
 
       <Box
         sx={{

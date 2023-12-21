@@ -1,9 +1,9 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import { ISidebar, Anchor } from "@/interfaces";
+import { ISidebarContext, Anchor } from "@/interfaces";
 
-const SidebarContext = createContext<ISidebar | null>(null);
+const SidebarContext = createContext<ISidebarContext | null>(null);
 
 function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState({

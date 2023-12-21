@@ -1,94 +1,62 @@
 "use client";
-import Image from "next/image";
 
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-
+import React from "react";
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Switch from "@mui/material/Switch";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-import { EmployeeIcon, LayoutGridIcon } from "../../public/assets/icons";
-import { menuItems } from "@/constants";
-import { useState } from "react";
+import { useSidebar } from "@/context/SidebarContext";
+import { ISidebar } from "@/interfaces";
 
-function Sidebar() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [checked, setChecked] = useState(true);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-  };
+function Sidebar({ heading, anchor, children }: ISidebar) {
+  const { isOpen, toggleSidebar } = useSidebar();
 
   return (
-    <Drawer
-      sx={{
-        width: "280px",
-        "& .MuiDrawer-paper": {
-          boxSizing: "border-box",
-          width: "280px",
-          padding: "24px 32px",
-        },
-      }}
-      variant="permanent"
-      anchor="left"
-    >
-      <Box sx={{ cursor: "pointer", textAlign: "center" }}>
-        <Image src="/logo.svg" width={157} height={24} alt="Humanline Logo" />
-      </Box>
-
-      <Button
-        variant="contained"
-        size="small"
-        color="success"
+    <div>
+      <Drawer
+        anchor="right"
+        open={isOpen[anchor]}
+        onClose={toggleSidebar(anchor, false)}
         sx={{
-          margin: "24px 0",
+          width: "396px",
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: "396px",
+            padding: "36px",
+          },
         }}
-        endIcon={<LayoutGridIcon />}
       >
-        Dashboard
-      </Button>
+        <Typography variant="h4">{heading}</Typography>
 
-      <List>
-        {menuItems.map((menu) => (
-          <ListItemButton
-            sx={{
-              borderRadius: "10px",
-              backgroundColor: (theme) =>
-                `${pathname === menu.path ? theme.palette.grey[200] : ""}`,
-            }}
-            key={menu.text}
-            onClick={() => router.push(menu.path)}
+        <Stack marginTop={4} spacing={4}>
+          {/* Content of the Sidebar */}
+          {children}
+        </Stack>
+
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            marginTop: "auto",
+            textAlign: "center",
+            width: "100%",
+          }}
+        >
+          <Button
+            onClick={toggleSidebar(anchor, false)}
+            variant="outlined"
+            sx={{ flex: 1 }}
           >
-            <ListItemIcon>
-              <EmployeeIcon isActive={pathname === menu.path} />
-            </ListItemIcon>
-            <ListItemText
-              sx={{
-                fontSize: "14px",
-                color: (theme) => theme.palette.text.primary,
-                fontWeight: (theme) => theme.typography.fontWeightBold,
-              }}
-              disableTypography={true}
-              primary={menu.text}
-            />
-          </ListItemButton>
-        ))}
-      </List>
+            Cancel
+          </Button>
 
-      <Switch
-        checked={checked}
-        onChange={handleChange}
-        inputProps={{ "aria-label": "controlled" }}
-        sx={{ marginTop: "auto" }}
-      />
-    </Drawer>
+          <Button color="greyScale" variant="contained" sx={{ flex: 1 }}>
+            Create
+          </Button>
+        </Stack>
+      </Drawer>
+    </div>
   );
 }
 
