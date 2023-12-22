@@ -51,3 +51,9 @@ export interface ISidebar {
   children: React.ReactNode;
   anchor: Anchor;
 }
+
+export interface ITabPanel {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}

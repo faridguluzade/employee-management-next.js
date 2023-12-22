@@ -46,6 +46,7 @@ function Sidebar({ heading, anchor, children }: ISidebar) {
           <Button
             onClick={toggleSidebar(anchor, false)}
             variant="outlined"
+            color="greyScale"
             sx={{ flex: 1 }}
           >
             Cancel
