@@ -1,5 +1,4 @@
 import { Theme } from "@mui/material/styles";
-
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Avatar from "@mui/material/Avatar";

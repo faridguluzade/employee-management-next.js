@@ -1,5 +1,3 @@
-// "use client";
-
 import Grid from "@mui/material/Unstable_Grid2";
 
 import EmployeeTable from "@/features/employees/EmployeeTable";
@@ -10,7 +8,7 @@ import { mockData, columns } from "@/constants";
 
 function Employees() {
   return (
-    <Grid container direction="column" gap={2} spacing={4}>
+    <Grid container direction="column" gap={6}>
       <Grid container direction="row">
         <EmployeeHeader />
       </Grid>

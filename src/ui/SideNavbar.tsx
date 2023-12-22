@@ -51,6 +51,7 @@ function SideNavbar() {
           margin: "24px 0",
         }}
         endIcon={<LayoutGridIcon />}
+        onClick={() => router.push("/dashboard")}
       >
         Dashboard
       </Button>

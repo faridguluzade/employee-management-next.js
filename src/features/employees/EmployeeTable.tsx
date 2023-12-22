@@ -18,9 +18,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import Actions from "@/ui/Actions";
+import Status from "@/ui/Status";
 
 import { ITable, Data } from "@/interfaces";
-import { purple, amber, red, green } from "@mui/material/colors";
 
 const EmployeeTable: React.FC<ITable> = ({
   data,
@@ -77,13 +77,6 @@ const EmployeeTable: React.FC<ITable> = ({
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const statusToTagName: any = {
-    active: green,
-    probation: purple,
-    "on-boarding": amber,
-    "on-leave": red,
   };
 
   return (
@@ -166,22 +159,7 @@ const EmployeeTable: React.FC<ITable> = ({
                   <TableCell>{row.departament}</TableCell>
                   <TableCell>{row.office}</TableCell>
                   <TableCell align="center">
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        background: statusToTagName[row.employeeStatus][50],
-                        width: "114px",
-                        padding: "4px 16px",
-                        color: statusToTagName[row.employeeStatus][600],
-                        fontWeight: 700,
-                        borderRadius: "8px",
-                        textAlign: "center",
-                        textTransform: "uppercase",
-                        fontSize: "12px",
-                      }}
-                    >
-                      {row.employeeStatus.replace("-", " ")}
-                    </Typography>
+                    <Status status={row.employeeStatus} />
                   </TableCell>
                   <TableCell>{row.account}</TableCell>
 
