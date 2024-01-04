@@ -57,30 +57,34 @@ function SideNavbar() {
       </Button>
 
       <List>
-        {menuItems.map((menu) => (
-          <ListItemButton
-            sx={{
-              borderRadius: "10px",
-              backgroundColor: (theme) =>
-                `${pathname === menu.path ? theme.palette.grey[200] : ""}`,
-            }}
-            key={menu.text}
-            onClick={() => router.push(menu.path)}
-          >
-            <ListItemIcon>
-              <EmployeeIcon isActive={pathname === menu.path} />
-            </ListItemIcon>
-            <ListItemText
+        {menuItems.map((menu) => {
+          const Icon = menu.icon;
+
+          return (
+            <ListItemButton
               sx={{
-                fontSize: "14px",
-                color: (theme) => theme.palette.text.primary,
-                fontWeight: (theme) => theme.typography.fontWeightBold,
+                borderRadius: "10px",
+                backgroundColor: (theme) =>
+                  `${pathname === menu.path ? theme.palette.grey[200] : ""}`,
               }}
-              disableTypography={true}
-              primary={menu.text}
-            />
-          </ListItemButton>
-        ))}
+              key={menu.text}
+              onClick={() => router.push(menu.path)}
+            >
+              <ListItemIcon>
+                <Icon isActive={pathname === menu.path} />
+              </ListItemIcon>
+              <ListItemText
+                sx={{
+                  fontSize: "14px",
+                  color: (theme) => theme.palette.text.primary,
+                  fontWeight: (theme) => theme.typography.fontWeightBold,
+                }}
+                disableTypography={true}
+                primary={menu.text}
+              />
+            </ListItemButton>
+          );
+        })}
       </List>
 
       <Switch

@@ -1,31 +1,43 @@
 import { Column, Data } from "@/interfaces";
-import { EmployeeIcon, ClipboardListIcon } from "../../public/assets/icons";
+import {
+  EmployeeIcon,
+  ClipboardListIcon,
+  TimerIcon,
+  CalendarIcon,
+  TrendingUpIcon,
+} from "../../public/assets/icons";
 
 type MenuItem = {
   text: string;
   path: string;
+  icon: any;
 };
 
 export const menuItems: MenuItem[] = [
   {
     text: "Employees",
     path: "/employees",
+    icon: EmployeeIcon,
   },
   {
     text: "Checklist",
     path: "/checklist",
+    icon: ClipboardListIcon,
   },
   {
     text: "Time Off",
     path: "/time-off",
+    icon: TimerIcon,
   },
   {
     text: "Attendance",
     path: "/attendance",
+    icon: CalendarIcon,
   },
   {
     text: "Setting",
     path: "/setting",
+    icon: TrendingUpIcon,
   },
 ];
 

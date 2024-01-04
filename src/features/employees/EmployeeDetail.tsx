@@ -10,6 +10,9 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
 import EmployeeOverview from "./EmployeeOverview";
 import Heading from "@/ui/Heading";
@@ -45,7 +48,17 @@ function EmployeeDetail() {
 
       <Grid container direction="row" gap={5}>
         {/* FIRST */}
-        <EmployeeOverview />
+        <Grid
+          xs={3}
+          sx={{
+            background: "#fff",
+            borderRadius: "16px",
+            padding: "24px",
+            alignSelf: "start",
+          }}
+        >
+          <EmployeeOverview />
+        </Grid>
 
         {/* SECOND */}
         <Grid
@@ -76,12 +89,12 @@ function EmployeeDetail() {
               />
               <Tab
                 label="Documents"
-                {...a11yProps(2)}
+                {...a11yProps(3)}
                 sx={{ textTransform: "capitalize", fontWeight: 700 }}
               />
               <Tab
                 label="Setting"
-                {...a11yProps(2)}
+                {...a11yProps(4)}
                 sx={{ textTransform: "capitalize", fontWeight: 700 }}
               />
             </Tabs>
@@ -111,7 +124,20 @@ function EmployeeDetail() {
                       <EditIcon2 />
                     </Button>
                   </Stack>
-                  <Stack>SALAM</Stack>
+                  <Stack>
+                    <List>
+                      <ListItem>
+                        <ListItemText primary="Full Name" />
+                        Salam
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText primary="Date of Birth" />
+                      </ListItem>
+                      <ListItem>
+                        <ListItemText primary="Nationality" />
+                      </ListItem>
+                    </List>
+                  </Stack>
                 </Stack>
               </Grid>
               <Grid>ELEYKUm</Grid>
@@ -121,6 +147,12 @@ function EmployeeDetail() {
             Item Two
           </TabPanel>
           <TabPanel value={value} index={2}>
+            Item Three
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            Item Three
+          </TabPanel>
+          <TabPanel value={value} index={4}>
             Item Three
           </TabPanel>
         </Grid>
