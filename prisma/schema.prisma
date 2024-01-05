@@ -45,15 +45,17 @@ model Office {
 
 model Employee {
     id              String         @id @default(uuid())
+    createdAt       DateTime       @default(now())
+    updatedAt       DateTime       @updatedAt
     firstName       String
     lastName        String
     email           String         @unique
-    JoinDate        DateTime
+    joinDate        DateTime
+    image           String?
     selected        Boolean        @default(false)
     status          EmployeeStatus @default(ACTIVE)
     nationality     String?
-    image           String?
-    DateOfBirth     DateTime?
+    dateOfBirth     DateTime?
     phone           String?
     maritalStatus   MaritalStatus?
     gender          Gender?
