@@ -1,7 +1,7 @@
 import Box from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { ITabPanel } from "@/interfaces";
+import { ITabPanel } from "@/types";
 
 function TabPanel(props: ITabPanel) {
   const { children, value, index, ...other } = props;

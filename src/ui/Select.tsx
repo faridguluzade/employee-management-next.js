@@ -8,7 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import MuiSelect, { SelectChangeEvent } from "@mui/material/Select";
 
-import { ISelect } from "@/interfaces";
+import { ISelect } from "@/types";
 
 function Select({ label, options }: ISelect) {
   const [value, setValue] = useState("");

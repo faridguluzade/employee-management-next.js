@@ -1,8 +1,8 @@
 import Grid from "@mui/material/Unstable_Grid2";
 
-import EmployeeTable from "@/features/employees/EmployeeTable";
-import EmployeeTableOperations from "@/features/employees/EmployeeTableOperations";
-import EmployeeHeader from "@/features/employees/EmployeeHeader";
+import EmployeeTable from "@/features/employees/table";
+import EmployeeTableOperations from "@/features/employees/table-operations";
+import EmployeeHeader from "@/features/employees/header";
 
 import { mockData, columns } from "@/constants";
 

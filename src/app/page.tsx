@@ -1,5 +1,7 @@
-import { Typography } from "@mui/material";
+import React from "react";
 
-export default function Home() {
-  return <Typography>FARID</Typography>;
+function page() {
+  return <div>Home</div>;
 }
+
+export default page;

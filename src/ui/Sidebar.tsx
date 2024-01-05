@@ -7,7 +7,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 import { useSidebar } from "@/context/SidebarContext";
-import { ISidebar } from "@/interfaces";
+import { ISidebar } from "@/types";
 
 function Sidebar({ heading, anchor, children }: ISidebar) {
   const { isOpen, toggleSidebar } = useSidebar();

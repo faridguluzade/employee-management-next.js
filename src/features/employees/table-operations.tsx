@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import Select from "@/ui/Select";
+import Select from "@/ui/select";
 
 import { SearchIcon } from "../../../public/assets/icons";
 import { statusArr } from "@/constants";

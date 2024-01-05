@@ -1,4 +1,4 @@
-import { Column, Data } from "@/interfaces";
+import { Column, Data } from "@/types";
 import {
   EmployeeIcon,
   ClipboardListIcon,
@@ -16,27 +16,27 @@ type MenuItem = {
 export const menuItems: MenuItem[] = [
   {
     text: "Employees",
-    path: "/employees",
+    path: "/dashboard/employees",
     icon: EmployeeIcon,
   },
   {
     text: "Checklist",
-    path: "/checklist",
+    path: "/dashboard/checklist",
     icon: ClipboardListIcon,
   },
   {
     text: "Time Off",
-    path: "/time-off",
+    path: "/dashboard/time-off",
     icon: TimerIcon,
   },
   {
     text: "Attendance",
-    path: "/attendance",
+    path: "/dashboard/attendance",
     icon: CalendarIcon,
   },
   {
     text: "Setting",
-    path: "/setting",
+    path: "/dashboard/setting",
     icon: TrendingUpIcon,
   },
 ];

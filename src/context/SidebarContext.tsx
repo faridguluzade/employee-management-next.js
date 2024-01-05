@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import { ISidebarContext, Anchor } from "@/interfaces";
+import { ISidebarContext, Anchor } from "@/types";
 
 const SidebarContext = createContext<ISidebarContext | null>(null);
 

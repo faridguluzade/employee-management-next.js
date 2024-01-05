@@ -14,9 +14,9 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 
-import EmployeeOverview from "./EmployeeOverview";
-import Heading from "@/ui/Heading";
-import TabPanel from "@/ui/TabPanel";
+import EmployeeOverview from "./overview";
+import Heading from "@/ui/heading";
+import TabPanel from "@/ui/tab-panel";
 
 import { LeftIcon, EditIcon2 } from "../../../public/assets/icons";
 import { grey } from "@mui/material/colors";

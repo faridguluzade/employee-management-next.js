@@ -4,8 +4,8 @@ import Box from "@mui/material/Box";
 import { grey } from "@mui/material/colors";
 import { Theme } from "@mui/material/styles";
 
-import Header from "./Header";
-import SideNavbar from "./SideNavbar";
+import Header from "./header";
+import SideNavbar from "./side-navbar";
 
 function AppLayout({ children }: { children: React.ReactNode }) {
   return (

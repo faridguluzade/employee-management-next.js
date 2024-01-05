@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { SidebarProvider } from "@/context/SidebarContext";
-import AppLayout from "@/ui/AppLayout";
 import ThemeRegistry from "@/theme/ThemeRegistry";
 
 export const metadata: Metadata = {
@@ -19,9 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <ThemeRegistry>
         <SidebarProvider>
-          <body>
-            <AppLayout>{children}</AppLayout>
-          </body>
+          <body>{children}</body>
         </SidebarProvider>
       </ThemeRegistry>
     </html>

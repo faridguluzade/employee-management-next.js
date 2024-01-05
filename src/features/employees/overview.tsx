@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
-import Status from "@/ui/Status";
+import Status from "@/ui/status";
 
 import { GlobalIcon, MailIcon, PhoneIcon } from "../../../public/assets/icons";
 
@@ -16,7 +16,7 @@ function EmployeeOverview() {
     >
       <Stack direction="column" gap={2} alignItems="center">
         <Avatar
-          src="https://s3-alpha-sig.figma.com/img/a5a6/6802/5cce8ec52d73b608b8229241a6e1001b?Expires=1704067200&Signature=Xp0ttts~PVpAi8tffdYCL6e9ioc9KzAYFZ5A3FgRyHrCUYPNyJylxAErlRiFs4GCNx1IPMP-PhEcBMQ3wRodcua~5Ykc7AExGb--IzJvBB56mGvwji4T3aBvKCBAiiv-fC-VW8-lsA5sHIGfib5Gcc8~XqCwOQ1simfY6K~sXgjxEaxH4d7dKYQnGtxSpETpG7eZkkVwC3p2pmtKOzduDFRudSrdND6OrPwjBYx2wIU8seq719nd-YreDk8AR~wjNv6jJIplGp0bl-j3rJtWNZzgIhxk~~OBdKedFfGB22aG1Wf8SVW~nkye6MZJF~lgMWWAfvllUX-02OmSfm1S0Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+          src="https://s3-alpha-sig.figma.com/img/0e5d/8279/8e2becda16e2f3abc85e162b63a8d214?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=O2sKyT~pl0NTdGtj6vUrhsOtdBizXokKiNXfQJL2D6qccpge999GZ3G4NkGP8TeiQVrpp9pbSmigQIzCGKULNw7N1nOj6VnMlBWuH8NvoAN9aT-AJfidtByQFUskfqpHP4xSTythtuaoPBUl3CbEjhrywU1fXXS18tB3gEGIYVORMPrDAgM8iHsofzlBgI5mlFMj4QZDS8N7xOsMgJ72-oHWyICb4~opyYPdCPOHpY64NEhgYqlL6X8HrA6ZVSaF5QkyEEwuiuYJXhyF1BqWqzYH-VCQ02GeLBNiqc4BAa0rXpKCWkzJ3k9O1SplylAs4UhyXsf2gAEVCHSVDG328A__"
           sx={{ width: 100, height: 100 }}
         />
         <Typography variant="h5" component="h2">
@@ -60,7 +60,7 @@ function EmployeeOverview() {
             Line Manager
           </Typography>
           <Stack direction="row" gap={1} alignItems="center">
-            <Avatar src="https://s3-alpha-sig.figma.com/img/db42/b32e/64deecee5214a6361521a0753a26a015?Expires=1704067200&Signature=McVCHsYn-QosMicYdAYhM4VHyvqpvoevAZ0UtlOnMfsBOmr-FXN-SwS4g1~VRyR-2WtvAzLagRwL707yRrr6NLCM8oc~LjmutgRx4Ji6fWr5BJDNR1FmxFH-BNgbJQPJokM2XtJ7oHNK1nl25-gdLgGWm6mH4gkUvgl05OIMc6MXVMiT3inzyl3v23L9U6zZ1Z8~pS4TJjqsSPQqy0-aGWw3MSXGY43DFYBuKMDRetXk1ojMeaUFZrh5sgPCnFLkRoemIRTSL6ak4Ho02DCunWi8Yjt7uUYvfvEgf0XTmA0PLJ253lsthqQx8wH7zsprs-l2SwESDgffPlvfZxuWZg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" />
+            <Avatar src="/avatar.png" />
             <Typography variant="subtitle2">Skylar Calzoni</Typography>
           </Stack>
         </Stack>

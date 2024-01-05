@@ -3,8 +3,8 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import Button from "@mui/material/Button";
 
-import Heading from "@/ui/Heading";
-import AddEmployee from "./AddEmployee";
+import Heading from "@/ui/heading";
+import AddEmployee from "./create-employee";
 
 import { PlusIcon } from "../../../public/assets/icons";
 import { useSidebar } from "@/context/SidebarContext";
