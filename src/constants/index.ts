@@ -186,41 +186,25 @@ export const columns: Column[] = [
   {
     id: "employeeName",
     label: "Employee Name",
-    // render: (row) => (
-    //   <Stack direction="row" spacing={1}>
-    //     <Avatar src="/avatar.png" />
-    //     <Box>
-    //       <Typography variant="body2">{row.employeeName}</Typography>
-    //       <Typography color="textSecondary" variant="caption" display="block">
-    //         {row.employeeEmail}
-    //       </Typography>
-    //     </Box>
-    //   </Stack>
-    // ),
   },
   {
     id: "jobTitle",
     label: "Job Title",
-    // render: (row) => `${row.jobTitle}`,
   },
   {
     id: "lineManager",
     label: "Line Manager",
-    // render: (row) => `${row.lineManager}`,
   },
   {
     id: "departament",
     label: "Departament",
-    // render: (row) => `${row.departament}`,
   },
   {
     id: "office",
     label: "Office",
-    // render: (row) => `${row.office} `,
   },
   {
     id: "employeeStatus",
     label: "Employee Status",
-    // render: (row) => ` ${row.employeeStatus}`,
   },
 ];

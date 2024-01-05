@@ -1,6 +1,7 @@
 import { EmployeeStatus } from "@prisma/client";
 
 export type EmployeesTable = {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;

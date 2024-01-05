@@ -25,7 +25,7 @@ function Status({ status }: { status: EmployeeStatus }) {
         fontSize: "12px",
       }}
     >
-      {status.replace("-", " ")}
+      {status.replace("_", " ")}
     </Typography>
   );
 }

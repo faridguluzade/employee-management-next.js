@@ -1,28 +1,15 @@
 import Grid from "@mui/material/Unstable_Grid2";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import Select from "@/ui/select";
 
-import { SearchIcon } from "../../../public/assets/icons";
+import Select from "@/ui/select";
+import Search from "./search";
+
 import { statusArr } from "@/constants";
 
 function EmployeeTableOperations() {
   return (
     <>
       <Grid xs={6}>
-        <TextField
-          id="outlined-basic"
-          label="Search Employee"
-          variant="outlined"
-          fullWidth
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
+        <Search label="Search Employee" />
       </Grid>
       <Grid xs={2}>
         <Select label="Status" options={statusArr} />

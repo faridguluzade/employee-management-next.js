@@ -4,13 +4,19 @@ import EmployeeTable from "@/features/employees/table";
 import EmployeeTableOperations from "@/features/employees/table-operations";
 import EmployeeHeader from "@/features/employees/header";
 
-import { mockData, columns } from "@/constants";
+import { columns } from "@/constants";
+import { getEmployees, getFilteredEmployees } from "@/services/apiEmployee";
 
-import { getEmployees } from "@/services/apiEmployee";
-
-async function Employees() {
-  const employees = await getEmployees();
-  console.log(employees);
+async function Employees({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || "";
+  const employees = await getFilteredEmployees(query);
 
   return (
     <Grid container direction="column" gap={6}>
@@ -23,13 +29,7 @@ async function Employees() {
       </Grid>
 
       <Grid>
-        <EmployeeTable
-          data={employees}
-          columns={columns}
-          pagination={true}
-          selection={true}
-          action={true}
-        />
+        <EmployeeTable employees={employees} query={query} columns={columns} />
       </Grid>
     </Grid>
   );
