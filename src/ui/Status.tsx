@@ -1,12 +1,14 @@
+import { EmployeeStatus } from "@prisma/client";
+
 import Typography from "@mui/material/Typography";
 import { amber, green, purple, red } from "@mui/material/colors";
 
-function Status({ status }: { status: string }) {
-  const statusToTagName: any = {
-    active: green,
-    probation: purple,
-    "on-boarding": amber,
-    "on-leave": red,
+function Status({ status }: { status: EmployeeStatus }) {
+  const statusToTagName = {
+    "ACTIVE": green,
+    "PROBATION": purple,
+    "ON_BOARDING": amber,
+    "ON_LEAVE": red,
   };
 
   return (
@@ -20,7 +22,6 @@ function Status({ status }: { status: string }) {
         fontWeight: 700,
         borderRadius: "8px",
         textAlign: "center",
-        textTransform: "uppercase",
         fontSize: "12px",
       }}
     >

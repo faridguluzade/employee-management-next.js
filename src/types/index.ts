@@ -1,3 +1,18 @@
+import { EmployeeStatus } from "@prisma/client";
+
+export type EmployeesTable = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  selected: boolean;
+  image: string | null;
+  status: EmployeeStatus;
+  job: { title: string } | null;
+  department: { name: string } | null;
+  office: { name: string } | null;
+  lineManager: { firstName: string; lastName: string } | null;
+};
+
 export interface ISelect {
   label: string;
   options: { label: string; value: string }[];
@@ -25,7 +40,7 @@ export interface Column {
 
 export interface ITable {
   data: any[];
-  columns: Column[];
+  columns: any[];
   selection?: boolean;
   pagination?: boolean;
   action?: boolean;

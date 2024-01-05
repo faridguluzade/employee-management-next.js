@@ -52,7 +52,7 @@ export const statusArr = [
 export const mockData: Data[] = [
   {
     id: 1,
-    employeeName: "John Doe",
+    employeeName: "Farid Doe",
     employeeEmail: "john.doe@company.com",
     employeeImage: "https://example.com/image1.jpg",
     jobTitle: "Software Engineer",
@@ -65,7 +65,7 @@ export const mockData: Data[] = [
   },
   {
     id: 2,
-    employeeName: "Jane Doe",
+    employeeName: "Murad",
     employeeEmail: "jane.doe@company.com",
     employeeImage: "https://example.com/image2.jpg",
     jobTitle: "Product Manager",
@@ -78,7 +78,7 @@ export const mockData: Data[] = [
   },
   {
     id: 3,
-    employeeName: "Jane Doe",
+    employeeName: "Ilham",
     employeeEmail: "jane.doe@company.com",
     employeeImage: "https://example.com/image2.jpg",
     jobTitle: "Product Manager",
@@ -91,7 +91,7 @@ export const mockData: Data[] = [
   },
   {
     id: 4,
-    employeeName: "Jane Doe",
+    employeeName: "Vaybe ",
     employeeEmail: "jane.doe@company.com",
     employeeImage: "https://example.com/image2.jpg",
     jobTitle: "Product Manager",
@@ -222,10 +222,5 @@ export const columns: Column[] = [
     id: "employeeStatus",
     label: "Employee Status",
     // render: (row) => ` ${row.employeeStatus}`,
-  },
-  {
-    id: "account",
-    label: "Account",
-    // render: (row) => `${row.account}`,
   },
 ];

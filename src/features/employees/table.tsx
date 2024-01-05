@@ -22,62 +22,62 @@ import Status from "@/ui/status";
 
 import { ITable, Data } from "@/types";
 
-const EmployeeTable: React.FC<ITable> = ({
+const EmployeeTable = ({
   data,
   columns,
   selection,
   pagination,
   action,
-}) => {
-  const [newData, setNewData] = useState<Data[]>([]);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [orderBy, setOrderBy] = useState<keyof Data>("id");
-  const [order, setOrder] = useState<"asc" | "desc">("asc");
-  const [allSelected, setAllSelected] = useState(false);
+}: any) => {
+  // const [newData, setNewData] = useState<Data[]>([]);
+  // const [page, setPage] = useState(0);
+  // const [rowsPerPage, setRowsPerPage] = useState(5);
+  // const [orderBy, setOrderBy] = useState<keyof Data>("id");
+  // const [order, setOrder] = useState<"asc" | "desc">("asc");
+  // const [allSelected, setAllSelected] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setNewData(data);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setNewData(data);
+  //   };
 
-    fetchData();
-  }, [orderBy, order, page, rowsPerPage]);
+  //   fetchData();
+  // }, [orderBy, order, page, rowsPerPage]);
 
-  const handleRequestSort = (property: keyof Data) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
-  };
+  // const handleRequestSort = (property: keyof Data) => {
+  //   const isAsc = orderBy === property && order === "asc";
+  //   setOrder(isAsc ? "desc" : "asc");
+  //   setOrderBy(property);
+  // };
 
-  const handleToggleSelect = (id: number) => {
-    setNewData((prevData) =>
-      prevData.map((item) =>
-        item.id === id ? { ...item, selected: !item.selected } : item
-      )
-    );
-  };
+  // const handleToggleSelect = (id: number) => {
+  //   setNewData((prevData) =>
+  //     prevData.map((item) =>
+  //       item.id === id ? { ...item, selected: !item.selected } : item
+  //     )
+  //   );
+  // };
 
-  const handleToggleSelectAll = () => {
-    setAllSelected(!allSelected);
-    setNewData((prevData) =>
-      prevData.map((item) => ({
-        ...item,
-        selected: !allSelected,
-      }))
-    );
-  };
+  // const handleToggleSelectAll = () => {
+  //   setAllSelected(!allSelected);
+  //   setNewData((prevData) =>
+  //     prevData.map((item) => ({
+  //       ...item,
+  //       selected: !allSelected,
+  //     }))
+  //   );
+  // };
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
+  // const handleChangePage = (event: unknown, newPage: number) => {
+  //   setPage(newPage);
+  // };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (
+  //   event: React.ChangeEvent<HTMLInputElement>
+  // ) => {
+  //   setRowsPerPage(parseInt(event.target.value, 10));
+  //   setPage(0);
+  // };
 
   return (
     <Paper>
@@ -88,23 +88,23 @@ const EmployeeTable: React.FC<ITable> = ({
               {selection && (
                 <TableCell>
                   <Checkbox
-                    indeterminate={
-                      !allSelected && newData.some((row) => row.selected)
-                    }
-                    checked={allSelected}
-                    onChange={handleToggleSelectAll}
+                  // indeterminate={
+                  //   !allSelected && newData.some((row) => row.selected)
+                  // }
+                  // checked={allSelected}
+                  // onChange={handleToggleSelectAll}
                   />
                 </TableCell>
               )}
-              {columns.map((column) => (
+              {columns.map((column: any) => (
                 <TableCell
                   sx={{ color: "#687588", fontWeight: 700 }}
                   key={column.id}
                 >
                   <TableSortLabel
-                    active={orderBy === column.id}
-                    direction={orderBy === column.id ? order : "asc"}
-                    onClick={() => handleRequestSort(column.id)}
+                  // active={orderBy === column.id}
+                  // direction={orderBy === column.id ? order : "asc"}
+                  // onClick={() => handleRequestSort(column.id)}
                   >
                     {column.label}
                   </TableSortLabel>
@@ -121,59 +121,56 @@ const EmployeeTable: React.FC<ITable> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {newData
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => (
-                <TableRow key={row.id}>
-                  {selection && (
-                    <TableCell>
-                      <Checkbox
-                        checked={row.selected}
-                        onChange={() => handleToggleSelect(row.id)}
-                      />
-                    </TableCell>
-                  )}
-                  {/* {columns.map((column) => ( */}
-                  {/* ))} */}
-                  <TableCell align="left">
-                    {
-                      <Stack direction="row" spacing={1}>
-                        <Avatar src="/avatar.png" />
-                        <Box>
-                          <Typography variant="body2" sx={{ fontWeight: 700 }}>
-                            {row.employeeName}
-                          </Typography>
-                          <Typography
-                            color="textSecondary"
-                            variant="caption"
-                            display="block"
-                          >
-                            {row.employeeEmail}
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    }
+            {data?.map((row: any) => (
+              <TableRow key={row.id}>
+                {selection && (
+                  <TableCell>
+                    <Checkbox
+                      checked={row.selected}
+                      // onChange={() => handleToggleSelect(row.id)}
+                    />
                   </TableCell>
-                  <TableCell>{row.jobTitle}</TableCell>
-                  <TableCell>{row.lineManager}</TableCell>
-                  <TableCell>{row.departament}</TableCell>
-                  <TableCell>{row.office}</TableCell>
-                  <TableCell align="center">
-                    <Status status={row.employeeStatus} />
-                  </TableCell>
-                  <TableCell>{row.account}</TableCell>
+                )}
+                {/* {columns.map((column) => ( */}
+                {/* ))} */}
+                <TableCell align="left">
+                  {
+                    <Stack direction="row" spacing={1}>
+                      <Avatar src={row.image} />
+                      <Box>
+                        <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                          {row.firstName} {row.lastName}
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="caption"
+                          display="block"
+                        >
+                          {row.email}
+                        </Typography>
+                      </Box>
+                    </Stack>
+                  }
+                </TableCell>
+                <TableCell>{row?.job.title}</TableCell>
+                <TableCell>{row?.lineManager?.firstName || "-"}</TableCell>
+                <TableCell>{row.department.name}</TableCell>
+                <TableCell>{row.office.name}</TableCell>
+                <TableCell align="center">
+                  <Status status={row.status} />
+                </TableCell>
 
-                  {action && (
-                    <TableCell align="center">
-                      <Actions />
-                    </TableCell>
-                  )}
-                </TableRow>
-              ))}
+                {action && (
+                  <TableCell align="center">
+                    <Actions />
+                  </TableCell>
+                )}
+              </TableRow>
+            ))}
           </TableBody>
         </MuiTable>
       </TableContainer>
-      {pagination && (
+      {/* {pagination && (
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
@@ -183,7 +180,7 @@ const EmployeeTable: React.FC<ITable> = ({
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      )}
+      )} */}
     </Paper>
   );
 };
