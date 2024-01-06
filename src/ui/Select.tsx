@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -10,11 +11,24 @@ import MuiSelect, { SelectChangeEvent } from "@mui/material/Select";
 
 import { ISelect } from "@/types";
 
-function Select({ label, options }: ISelect) {
-  const [value, setValue] = useState("");
+function Select({ label, options, filterField }: ISelect) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const currentFilter = searchParams.get(filterField) || options[0].value;
+
+  console.log(currentFilter);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setValue(event.target.value as string);
+    const params = new URLSearchParams(searchParams);
+    if (event.target.value) {
+      params.set(filterField, event.target.value);
+    } else {
+      params.delete(filterField);
+    }
+
+    replace(`${pathname}?${params.toString()}`);
   };
 
   return (
@@ -24,7 +38,7 @@ function Select({ label, options }: ISelect) {
         <MuiSelect
           labelId="select-label"
           id="select"
-          value={value}
+          value={currentFilter}
           label={label}
           onChange={handleChange}
         >

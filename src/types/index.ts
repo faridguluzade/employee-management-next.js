@@ -15,6 +15,7 @@ export type EmployeesTable = {
 };
 
 export interface ISelect {
+  filterField: string;
   label: string;
   options: { label: string; value: string }[];
 }

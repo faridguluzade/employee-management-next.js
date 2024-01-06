@@ -42,11 +42,11 @@ export const menuItems: MenuItem[] = [
 ];
 
 export const statusArr = [
-  { label: "All Status", value: "All Status" },
-  { label: "Active", value: "Active" },
-  { label: "On Boarding", value: "On Boarding" },
-  { label: "Probation", value: "Probation" },
-  { label: "On Leave", value: "On Leave" },
+  { label: "All Status", value: "" },
+  { label: "Active", value: "ACTIVE" },
+  { label: "On Boarding", value: "ON_BOARDING" },
+  { label: "Probation", value: "PROBATION" },
+  { label: "On Leave", value: "ON_LEAVE" },
 ];
 
 export const mockData: Data[] = [

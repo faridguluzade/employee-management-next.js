@@ -1,6 +1,6 @@
 import { unstable_noStore as noStore } from "next/cache";
 
-import { PrismaClient } from "@prisma/client";
+import { EmployeeStatus, PrismaClient } from "@prisma/client";
 import { EmployeesTable } from "@/types";
 
 const prisma = new PrismaClient();
@@ -37,10 +37,12 @@ export async function getEmployees(): Promise<EmployeesTable[]> {
 }
 
 export async function getFilteredEmployees(
-  query?: string
-  // currentPage?: string
+  query?: string,
+  status?: string
 ): Promise<EmployeesTable[]> {
   noStore();
+
+  const employeeStatus = status ? (status as EmployeeStatus) : undefined;
 
   try {
     const employees = await prisma.employee.findMany({
@@ -63,10 +65,17 @@ export async function getFilteredEmployees(
         },
       },
       where: {
-        OR: [
-          { firstName: { contains: query, mode: "insensitive" } },
-          { lastName: { contains: query, mode: "insensitive" } },
-          { department: { name: { contains: query, mode: "insensitive" } } },
+        AND: [
+          {
+            OR: [
+              { firstName: { contains: query, mode: "insensitive" } },
+              { lastName: { contains: query, mode: "insensitive" } },
+              {
+                department: { name: { contains: query, mode: "insensitive" } },
+              },
+            ],
+          },
+          status ? { status: { equals: employeeStatus } } : {},
         ],
       },
     });
