@@ -1,3 +1,5 @@
+import Grid from "@mui/material/Unstable_Grid2";
+
 import MuiTable from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -16,17 +18,22 @@ import Typography from "@mui/material/Typography";
 import Actions from "@/ui/actions";
 import Status from "@/ui/status";
 
-import { Column, EmployeesTable } from "@/types";
+import { getFilteredEmployees } from "@/services/apiEmployee";
+import { columns } from "@/constants";
 
-const EmployeeTable = ({
-  employees,
-  columns,
+export default async function EmployeeTable({
   query,
+  job,
+  office,
+  status,
 }: {
-  employees: EmployeesTable[];
-  columns: Column[];
   query: string;
-}) => {
+  job: string;
+  office: string;
+  status: string;
+}) {
+  const employees = await getFilteredEmployees({ query, status, office, job });
+
   return (
     <Paper>
       <TableContainer>
@@ -111,9 +118,7 @@ const EmployeeTable = ({
       </TableContainer>
     </Paper>
   );
-};
-
-export default EmployeeTable;
+}
 
 // const [newData, setNewData] = useState<Data[]>([]);
 // const [page, setPage] = useState(0);

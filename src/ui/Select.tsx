@@ -47,6 +47,7 @@ function Select({ label, options, filterField }: ISelect) {
           label={label}
           onChange={(e) => handleChange(e.target.value)}
         >
+          <MenuItem value="all">All {label}</MenuItem>
           {options.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}

@@ -1,46 +1,51 @@
+import { Suspense } from "react";
+
 import Grid from "@mui/material/Unstable_Grid2";
+
 import EmployeeTable from "@/ui/employees/table";
-import EmployeeTableOperations from "@/ui/employees/table-operations";
-import EmployeeHeader from "@/ui/employees/header";
+import TableOperations from "@/ui/employees/table-operations";
+import Header from "@/ui/employees/header";
+import { TableOperationsSkeleton, TableSkeleton } from "@/ui/skeletons";
 
 import { getFilteredEmployees } from "@/services/apiEmployee";
-import { getOffices } from "@/services/apiOffice";
-import { getJobs } from "@/services/apiJob";
-import { columns } from "@/constants";
 
-async function Employees({
+export default async function Employees({
   searchParams,
 }: {
   searchParams?: {
     query?: string;
     page?: string;
     status?: string;
+    office?: string;
+    job?: string;
   };
 }) {
   const query = searchParams?.query || "";
   const status = searchParams?.status || "";
-  // const employees = await getFilteredEmployees(query, status);
-  const [employees, offices, jobs] = await Promise.all([
-    getFilteredEmployees(query, status),
-    getOffices(),
-    getJobs(),
-  ]);
+  const office = searchParams?.office || "";
+  const job = searchParams?.job || "";
 
   return (
     <Grid container direction="column" gap={6}>
       <Grid container direction="row">
-        <EmployeeHeader />
+        <Header />
       </Grid>
 
-      <Grid container direction="row" spacing={2}>
-        <EmployeeTableOperations />
-      </Grid>
+      <Suspense fallback={<TableOperationsSkeleton />}>
+        <TableOperations />
+      </Suspense>
 
-      <Grid>
-        <EmployeeTable employees={employees} query={query} columns={columns} />
-      </Grid>
+      <Suspense
+        key={query + status + office + job}
+        fallback={<TableSkeleton rowsNum={5} />}
+      >
+        <EmployeeTable
+          query={query}
+          status={status}
+          office={office}
+          job={job}
+        />
+      </Suspense>
     </Grid>
   );
 }
-
-export default Employees;

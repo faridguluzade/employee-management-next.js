@@ -9,7 +9,7 @@ import AddEmployee from "./create-employee";
 import { PlusIcon } from "../../../public/assets/icons";
 import { useSidebar } from "@/context/SidebarContext";
 
-function EmployeeHeader() {
+function Header() {
   const { toggleSidebar } = useSidebar();
 
   return (
@@ -35,4 +35,4 @@ function EmployeeHeader() {
   );
 }
 
-export default EmployeeHeader;
+export default Header;

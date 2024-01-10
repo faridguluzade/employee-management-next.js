@@ -36,14 +36,23 @@ export async function getEmployees(): Promise<EmployeesTable[]> {
   }
 }
 
-export async function getFilteredEmployees(
-  query?: string,
-  status?: string
-): Promise<EmployeesTable[]> {
+export async function getFilteredEmployees({
+  query,
+  status,
+  job,
+  office,
+}: {
+  query: string;
+  status: string;
+  job: string;
+  office: string;
+}): Promise<EmployeesTable[]> {
   noStore();
 
   const employeeStatus =
     !status || status === "all" ? undefined : (status as EmployeeStatus);
+  const employeeJob = !job || job === "all" ? undefined : job;
+  const employeeOffice = !office || office === "all" ? undefined : office;
 
   try {
     const employees = await prisma.employee.findMany({
@@ -77,6 +86,16 @@ export async function getFilteredEmployees(
             ],
           },
           status ? { status: { equals: employeeStatus } } : {},
+          job
+            ? { job: { title: { equals: employeeJob, mode: "insensitive" } } }
+            : {},
+          office
+            ? {
+                office: {
+                  name: { equals: employeeOffice, mode: "insensitive" },
+                },
+              }
+            : {},
         ],
       },
     });
