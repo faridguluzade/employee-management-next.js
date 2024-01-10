@@ -13,3 +13,6 @@ export function transformToSelectOptions<
 
   return newData;
 }
+
+export const filterValue = <T>(value: T): T | undefined =>
+  !value || value === "all" ? undefined : value;

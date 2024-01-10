@@ -1,8 +1,8 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import MuiPagination from "@mui/material/Pagination";
 
+import { useQueryString } from "@/hooks/useQueryString";
 import { PAGE_SIZE } from "@/lib/constants";
 
 export default function Pagination({
@@ -12,22 +12,13 @@ export default function Pagination({
   count: number;
   currentPage: number;
 }) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  const { createQueryString } = useQueryString();
 
   const pageCount = Math.ceil(count / PAGE_SIZE);
 
-  console.log(count);
-
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("page", value.toString());
-
-    replace(`${pathname}?${params.toString()}`);
+    createQueryString("page", value.toString());
   };
-
-  //   if (pageCount <= 1) return null;
 
   return (
     <MuiPagination

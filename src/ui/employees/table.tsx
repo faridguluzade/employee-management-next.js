@@ -42,93 +42,88 @@ export default async function EmployeeTable({
   });
 
   return (
-    <Stack spacing={4}>
-      <Paper>
-        <TableContainer>
-          <MuiTable>
-            <TableHead>
-              <TableRow>
-                <TableCell>
-                  <Checkbox
-                  // indeterminate={
-                  //   !allSelected && newData.some((row) => row.selected)
-                  // }
-                  // checked={allSelected}
-                  // onChange={handleToggleSelectAll}
-                  />
-                </TableCell>
-                {columns.map((column: any) => (
-                  <TableCell
-                    sx={{ color: "#687588", fontWeight: 700 }}
-                    key={column.id}
-                  >
-                    <TableSortLabel
-                    // active={orderBy === column.id}
-                    // direction={orderBy === column.id ? order : "asc"}
-                    // onClick={() => handleRequestSort(column.id)}
-                    >
-                      {column.label}
-                    </TableSortLabel>
-                  </TableCell>
-                ))}
+    <Paper>
+      <TableContainer>
+        <MuiTable>
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                <Checkbox
+                // indeterminate={
+                //   !allSelected && newData.some((row) => row.selected)
+                // }
+                // checked={allSelected}
+                // onChange={handleToggleSelectAll}
+                />
+              </TableCell>
+              {columns.map((column: any) => (
                 <TableCell
                   sx={{ color: "#687588", fontWeight: 700 }}
-                  align="center"
+                  key={column.id}
                 >
-                  Action
+                  <TableSortLabel
+                  // active={orderBy === column.id}
+                  // direction={orderBy === column.id ? order : "asc"}
+                  // onClick={() => handleRequestSort(column.id)}
+                  >
+                    {column.label}
+                  </TableSortLabel>
+                </TableCell>
+              ))}
+              <TableCell
+                sx={{ color: "#687588", fontWeight: 700 }}
+                align="center"
+              >
+                Action
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {employees?.map((employee: any) => (
+              <TableRow key={employee.id}>
+                <TableCell>
+                  <Checkbox
+                    checked={employee.selected}
+                    // onChange={() => handleToggleSelect(row.id)}
+                  />
+                </TableCell>
+
+                <TableCell align="left">
+                  {
+                    <Stack direction="row" spacing={1}>
+                      <Avatar src={employee.image} />
+                      <Box>
+                        <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                          {employee.firstName} {employee.lastName}
+                        </Typography>
+                        <Typography
+                          color="textSecondary"
+                          variant="caption"
+                          display="block"
+                        >
+                          {employee.email}
+                        </Typography>
+                      </Box>
+                    </Stack>
+                  }
+                </TableCell>
+                <TableCell>{employee?.job.title}</TableCell>
+                <TableCell>{employee?.lineManager?.firstName || "-"}</TableCell>
+                <TableCell>{employee.department.name}</TableCell>
+                <TableCell>{employee.office.name}</TableCell>
+                <TableCell align="center">
+                  <Status status={employee.status} />
+                </TableCell>
+
+                <TableCell align="center">
+                  <Actions />
                 </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {employees?.map((employee: any) => (
-                <TableRow key={employee.id}>
-                  <TableCell>
-                    <Checkbox
-                      checked={employee.selected}
-                      // onChange={() => handleToggleSelect(row.id)}
-                    />
-                  </TableCell>
-
-                  <TableCell align="left">
-                    {
-                      <Stack direction="row" spacing={1}>
-                        <Avatar src={employee.image} />
-                        <Box>
-                          <Typography variant="body2" sx={{ fontWeight: 700 }}>
-                            {employee.firstName} {employee.lastName}
-                          </Typography>
-                          <Typography
-                            color="textSecondary"
-                            variant="caption"
-                            display="block"
-                          >
-                            {employee.email}
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    }
-                  </TableCell>
-                  <TableCell>{employee?.job.title}</TableCell>
-                  <TableCell>
-                    {employee?.lineManager?.firstName || "-"}
-                  </TableCell>
-                  <TableCell>{employee.department.name}</TableCell>
-                  <TableCell>{employee.office.name}</TableCell>
-                  <TableCell align="center">
-                    <Status status={employee.status} />
-                  </TableCell>
-
-                  <TableCell align="center">
-                    <Actions />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </MuiTable>
-        </TableContainer>
-      </Paper>
-      <Pagination currentPage={currentPage} count={count} />
-    </Stack>
+            ))}
+          </TableBody>
+        </MuiTable>
+      </TableContainer>
+    </Paper>
   );
 }
 

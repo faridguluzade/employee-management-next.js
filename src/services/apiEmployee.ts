@@ -4,6 +4,7 @@ import { EmployeeStatus, PrismaClient } from "@prisma/client";
 import { EmployeesTable } from "@/types";
 
 import { PAGE_SIZE } from "@/lib/constants";
+import { filterValue } from "@/lib/utils";
 
 const prisma = new PrismaClient();
 
@@ -22,10 +23,9 @@ export async function getFilteredEmployees({
 }): Promise<{ employees: EmployeesTable[]; count: number }> {
   noStore();
 
-  const employeeStatus =
-    !status || status === "all" ? undefined : (status as EmployeeStatus);
-  const employeeJob = !job || job === "all" ? undefined : job;
-  const employeeOffice = !office || office === "all" ? undefined : office;
+  const employeeStatus = filterValue(status) as EmployeeStatus;
+  const employeeJob = filterValue(job);
+  const employeeOffice = filterValue(office);
 
   const offset = (currentPage - 1) * PAGE_SIZE;
 
@@ -120,39 +120,46 @@ export async function getEmployeePages({
   status,
   job,
   office,
-  currentPage,
 }: {
   query: string;
   status: string;
   job: string;
   office: string;
-  currentPage: number;
 }) {
-  const employeeStatus =
-    !status || status === "all" ? undefined : (status as EmployeeStatus);
-  const employeeJob = !job || job === "all" ? undefined : job;
-  const employeeOffice = !office || office === "all" ? undefined : office;
+  const employeeStatus = filterValue(status) as EmployeeStatus;
+  const employeeJob = filterValue(job);
+  const employeeOffice = filterValue(office);
 
-  const count = await prisma.employee.count({
-    where: {
-      AND: [
-        {
-          OR: [
-            { firstName: { contains: query, mode: "insensitive" } },
-            { lastName: { contains: query, mode: "insensitive" } },
-            { department: { name: { contains: query, mode: "insensitive" } } },
-          ],
-        },
-        status ? { status: { equals: employeeStatus } } : {},
-        job
-          ? { job: { title: { equals: employeeJob, mode: "insensitive" } } }
-          : {},
-        office
-          ? {
-              office: { name: { equals: employeeOffice, mode: "insensitive" } },
-            }
-          : {},
-      ],
-    },
-  });
+  try {
+    const count = await prisma.employee.count({
+      where: {
+        AND: [
+          {
+            OR: [
+              { firstName: { contains: query, mode: "insensitive" } },
+              { lastName: { contains: query, mode: "insensitive" } },
+              {
+                department: { name: { contains: query, mode: "insensitive" } },
+              },
+            ],
+          },
+          status ? { status: { equals: employeeStatus } } : {},
+          job
+            ? { job: { title: { equals: employeeJob, mode: "insensitive" } } }
+            : {},
+          office
+            ? {
+                office: {
+                  name: { equals: employeeOffice, mode: "insensitive" },
+                },
+              }
+            : {},
+        ],
+      },
+    });
+
+    return count;
+  } catch (error) {
+    throw new Error("Failed to fetch the Employees Count");
+  }
 }

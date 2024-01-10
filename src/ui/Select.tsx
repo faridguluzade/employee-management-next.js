@@ -1,31 +1,22 @@
 "use client";
 
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
-
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import MuiSelect from "@mui/material/Select";
 
+import { useQueryString } from "@/hooks/useQueryString";
+
 import { ISelect } from "@/types";
 
 function Select({ label, options, filterField }: ISelect) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  const { createQueryString, searchParams } = useQueryString();
 
   const currentFilter = searchParams.get(filterField);
 
   const handleChange = (term: string | null) => {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set(filterField, term);
-    } else {
-      params.delete(filterField);
-    }
-
-    replace(`${pathname}?${params.toString()}`);
+    createQueryString(filterField, term);
   };
 
   return (
