@@ -1,5 +1,3 @@
-import Grid from "@mui/material/Unstable_Grid2";
-
 import MuiTable from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -15,6 +13,7 @@ import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import Pagination from "./pagination";
 import Actions from "@/ui/actions";
 import Status from "@/ui/status";
 
@@ -26,97 +25,110 @@ export default async function EmployeeTable({
   job,
   office,
   status,
+  currentPage,
 }: {
   query: string;
   job: string;
   office: string;
   status: string;
+  currentPage: number;
 }) {
-  const employees = await getFilteredEmployees({ query, status, office, job });
+  const { employees, count } = await getFilteredEmployees({
+    query,
+    status,
+    office,
+    job,
+    currentPage,
+  });
 
   return (
-    <Paper>
-      <TableContainer>
-        <MuiTable>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <Checkbox
-                // indeterminate={
-                //   !allSelected && newData.some((row) => row.selected)
-                // }
-                // checked={allSelected}
-                // onChange={handleToggleSelectAll}
-                />
-              </TableCell>
-              {columns.map((column: any) => (
-                <TableCell
-                  sx={{ color: "#687588", fontWeight: 700 }}
-                  key={column.id}
-                >
-                  <TableSortLabel
-                  // active={orderBy === column.id}
-                  // direction={orderBy === column.id ? order : "asc"}
-                  // onClick={() => handleRequestSort(column.id)}
-                  >
-                    {column.label}
-                  </TableSortLabel>
-                </TableCell>
-              ))}
-              <TableCell
-                sx={{ color: "#687588", fontWeight: 700 }}
-                align="center"
-              >
-                Action
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {employees?.map((employee: any) => (
-              <TableRow key={employee.id}>
+    <Stack spacing={4}>
+      <Paper>
+        <TableContainer>
+          <MuiTable>
+            <TableHead>
+              <TableRow>
                 <TableCell>
                   <Checkbox
-                    checked={employee.selected}
-                    // onChange={() => handleToggleSelect(row.id)}
+                  // indeterminate={
+                  //   !allSelected && newData.some((row) => row.selected)
+                  // }
+                  // checked={allSelected}
+                  // onChange={handleToggleSelectAll}
                   />
                 </TableCell>
-
-                <TableCell align="left">
-                  {
-                    <Stack direction="row" spacing={1}>
-                      <Avatar src={employee.image} />
-                      <Box>
-                        <Typography variant="body2" sx={{ fontWeight: 700 }}>
-                          {employee.firstName} {employee.lastName}
-                        </Typography>
-                        <Typography
-                          color="textSecondary"
-                          variant="caption"
-                          display="block"
-                        >
-                          {employee.email}
-                        </Typography>
-                      </Box>
-                    </Stack>
-                  }
-                </TableCell>
-                <TableCell>{employee?.job.title}</TableCell>
-                <TableCell>{employee?.lineManager?.firstName || "-"}</TableCell>
-                <TableCell>{employee.department.name}</TableCell>
-                <TableCell>{employee.office.name}</TableCell>
-                <TableCell align="center">
-                  <Status status={employee.status} />
-                </TableCell>
-
-                <TableCell align="center">
-                  <Actions />
+                {columns.map((column: any) => (
+                  <TableCell
+                    sx={{ color: "#687588", fontWeight: 700 }}
+                    key={column.id}
+                  >
+                    <TableSortLabel
+                    // active={orderBy === column.id}
+                    // direction={orderBy === column.id ? order : "asc"}
+                    // onClick={() => handleRequestSort(column.id)}
+                    >
+                      {column.label}
+                    </TableSortLabel>
+                  </TableCell>
+                ))}
+                <TableCell
+                  sx={{ color: "#687588", fontWeight: 700 }}
+                  align="center"
+                >
+                  Action
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </MuiTable>
-      </TableContainer>
-    </Paper>
+            </TableHead>
+            <TableBody>
+              {employees?.map((employee: any) => (
+                <TableRow key={employee.id}>
+                  <TableCell>
+                    <Checkbox
+                      checked={employee.selected}
+                      // onChange={() => handleToggleSelect(row.id)}
+                    />
+                  </TableCell>
+
+                  <TableCell align="left">
+                    {
+                      <Stack direction="row" spacing={1}>
+                        <Avatar src={employee.image} />
+                        <Box>
+                          <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                            {employee.firstName} {employee.lastName}
+                          </Typography>
+                          <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            display="block"
+                          >
+                            {employee.email}
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    }
+                  </TableCell>
+                  <TableCell>{employee?.job.title}</TableCell>
+                  <TableCell>
+                    {employee?.lineManager?.firstName || "-"}
+                  </TableCell>
+                  <TableCell>{employee.department.name}</TableCell>
+                  <TableCell>{employee.office.name}</TableCell>
+                  <TableCell align="center">
+                    <Status status={employee.status} />
+                  </TableCell>
+
+                  <TableCell align="center">
+                    <Actions />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </MuiTable>
+        </TableContainer>
+      </Paper>
+      <Pagination currentPage={currentPage} count={count} />
+    </Stack>
   );
 }
 

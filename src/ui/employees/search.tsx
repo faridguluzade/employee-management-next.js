@@ -14,6 +14,8 @@ function Search({ label }: { label: string }) {
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
 
+    params.set("page", "1");
+
     if (term) {
       params.set("query", term);
     } else {
@@ -25,7 +27,6 @@ function Search({ label }: { label: string }) {
 
   return (
     <TextField
-      defaultValue={searchParams.get("query")?.toString()}
       onChange={(e) => handleSearch(e.target.value)}
       id="outlined-basic"
       label={label}

@@ -16,6 +16,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
       <Box
         sx={{
           width: "100%",
+          // height: "100vh",
           background: grey[50],
           padding: "32px",
         }}

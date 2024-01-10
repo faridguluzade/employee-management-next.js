@@ -6,17 +6,9 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import MuiSelect, { SelectChangeEvent } from "@mui/material/Select";
+import MuiSelect from "@mui/material/Select";
 
 import { ISelect } from "@/types";
-
-// export const statusArr = [
-//   { label: "All Status", value: "all" },
-//   { label: "Active", value: "ACTIVE" },
-//   { label: "On Boarding", value: "ON_BOARDING" },
-//   { label: "Probation", value: "PROBATION" },
-//   { label: "On Leave", value: "ON_LEAVE" },
-// ];
 
 function Select({ label, options, filterField }: ISelect) {
   const searchParams = useSearchParams();
@@ -48,7 +40,7 @@ function Select({ label, options, filterField }: ISelect) {
           onChange={(e) => handleChange(e.target.value)}
         >
           <MenuItem value="all">All {label}</MenuItem>
-          {options.map((option) => (
+          {options?.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>

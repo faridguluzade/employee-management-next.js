@@ -43,26 +43,13 @@ export function TableSkeleton({ rowsNum }: { rowsNum: number }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {[...Array(5)].map((row, index) => (
+            {[...Array(8)].map((row, index) => (
               <TableRow key={index}>
-                <TableCell>
-                  <Skeleton animation="wave" variant="text" />
-                </TableCell>
-                <TableCell>
-                  <Skeleton animation="wave" variant="text" />
-                </TableCell>
-                <TableCell>
-                  <Skeleton animation="wave" variant="text" />
-                </TableCell>
-                <TableCell>
-                  <Skeleton animation="wave" variant="text" />
-                </TableCell>
-                <TableCell>
-                  <Skeleton animation="wave" variant="text" />
-                </TableCell>
-                <TableCell>
-                  <Skeleton animation="wave" variant="text" />
-                </TableCell>
+                {[...Array(6)].map((row, index) => (
+                  <TableCell key={index}>
+                    <Skeleton animation="wave" variant="text" />
+                  </TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>

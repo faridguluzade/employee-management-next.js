@@ -6,7 +6,7 @@ interface SelectOption {
 export function transformToSelectOptions<
   T extends { id: number; name?: string; title?: string }
 >(data: T[]): SelectOption[] {
-  const newData = data.map((item) => ({
+  const newData = data?.map((item) => ({
     label: item.name || item.title || "",
     value: (item.name || item.title || "").toLowerCase(),
   }));
