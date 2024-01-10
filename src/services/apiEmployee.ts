@@ -42,7 +42,8 @@ export async function getFilteredEmployees(
 ): Promise<EmployeesTable[]> {
   noStore();
 
-  const employeeStatus = status ? (status as EmployeeStatus) : undefined;
+  const employeeStatus =
+    !status || status === "all" ? undefined : (status as EmployeeStatus);
 
   try {
     const employees = await prisma.employee.findMany({

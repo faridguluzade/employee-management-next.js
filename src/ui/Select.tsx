@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import Box from "@mui/material/Box";
@@ -11,19 +10,25 @@ import MuiSelect, { SelectChangeEvent } from "@mui/material/Select";
 
 import { ISelect } from "@/types";
 
+// export const statusArr = [
+//   { label: "All Status", value: "all" },
+//   { label: "Active", value: "ACTIVE" },
+//   { label: "On Boarding", value: "ON_BOARDING" },
+//   { label: "Probation", value: "PROBATION" },
+//   { label: "On Leave", value: "ON_LEAVE" },
+// ];
+
 function Select({ label, options, filterField }: ISelect) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const currentFilter = searchParams.get(filterField) || options[0].value;
+  const currentFilter = searchParams.get(filterField);
 
-  console.log(currentFilter);
-
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (term: string | null) => {
     const params = new URLSearchParams(searchParams);
-    if (event.target.value) {
-      params.set(filterField, event.target.value);
+    if (term) {
+      params.set(filterField, term);
     } else {
       params.delete(filterField);
     }
@@ -40,7 +45,7 @@ function Select({ label, options, filterField }: ISelect) {
           id="select"
           value={currentFilter}
           label={label}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e.target.value)}
         >
           {options.map((option) => (
             <MenuItem key={option.value} value={option.value}>

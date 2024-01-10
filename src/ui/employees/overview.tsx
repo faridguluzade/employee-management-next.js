@@ -26,7 +26,7 @@ function EmployeeOverview() {
         <Typography variant="subtitle1" color="textSecondary">
           3D Designer
         </Typography>
-        <Status status="active" />
+        <Status status="ACTIVE" />
       </Stack>
       <Stack direction="column" gap={2}>
         <Stack direction="row" spacing={1}>

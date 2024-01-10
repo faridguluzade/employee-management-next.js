@@ -42,7 +42,7 @@ export const menuItems: MenuItem[] = [
 ];
 
 export const statusArr = [
-  { label: "All Status", value: "" },
+  { label: "All Status", value: "all" },
   { label: "Active", value: "ACTIVE" },
   { label: "On Boarding", value: "ON_BOARDING" },
   { label: "Probation", value: "PROBATION" },

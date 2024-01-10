@@ -1,4 +1,4 @@
-import EmployeeDetail from "@/features/employees/detail";
+import EmployeeDetail from "@/ui/employees/detail";
 
 function Employee() {
   return <EmployeeDetail />;

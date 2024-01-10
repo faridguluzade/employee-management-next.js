@@ -15,7 +15,7 @@ const AddEmployee = () => {
       <TextField required type="text" label="First Name" />
       <TextField required type="text" label="Last Name" />
       <TextField required type="email" label="Email Address" />
-      <Select label="Status" options={statusArr} />
+      <Select filterField="status" label="Status" options={statusArr} />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker />
       </LocalizationProvider>

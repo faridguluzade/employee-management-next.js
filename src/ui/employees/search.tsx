@@ -25,8 +25,8 @@ function Search({ label }: { label: string }) {
 
   return (
     <TextField
-      onChange={(e) => handleSearch(e.target.value)}
       defaultValue={searchParams.get("query")?.toString()}
+      onChange={(e) => handleSearch(e.target.value)}
       id="outlined-basic"
       label={label}
       variant="outlined"

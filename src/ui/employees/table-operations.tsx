@@ -5,17 +5,17 @@ import Search from "./search";
 
 import { statusArr } from "@/constants";
 
-async function EmployeeTableOperations() {
+function EmployeeTableOperations() {
   return (
     <>
       <Grid xs={6}>
         <Search label="Search Employee" />
       </Grid>
       <Grid xs={2}>
-        <Select filterField="" label="Status" options={statusArr} />
+        {/* <Select filterField="" label="Status" options={statusArr} /> */}
       </Grid>
       <Grid xs={2}>
-        <Select filterField="" label="Status" options={statusArr} />
+        {/* <Select filterField="" label="Status" options={statusArr} /> */}
       </Grid>
       <Grid xs={2}>
         <Select filterField="status" label="Status" options={statusArr} />
