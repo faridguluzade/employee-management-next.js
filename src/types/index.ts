@@ -66,6 +66,8 @@ export interface ISidebar {
   heading: string;
   children: React.ReactNode;
   anchor: Anchor;
+  action: (payload: FormData) => void;
+  ref: any;
 }
 
 export interface ITabPanel {

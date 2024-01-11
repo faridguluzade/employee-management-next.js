@@ -1,4 +1,4 @@
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 
 import { EmployeeStatus, PrismaClient } from "@prisma/client";
 import { EmployeesTable } from "@/types";
@@ -20,7 +20,7 @@ export async function getFilteredEmployees({
   job: string;
   office: string;
   currentPage: number;
-}): Promise<{ employees: EmployeesTable[]; count: number }> {
+}): Promise<EmployeesTable[]> {
   noStore();
 
   const employeeStatus = filterValue(status) as EmployeeStatus;
@@ -30,88 +30,63 @@ export async function getFilteredEmployees({
   const offset = (currentPage - 1) * PAGE_SIZE;
 
   try {
-    const [employees, count] = await Promise.all([
-      prisma.employee.findMany({
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
-          email: true,
-          selected: true,
-          status: true,
-          image: true,
-          job: { select: { title: true } },
-          department: { select: { name: true } },
-          office: { select: { name: true } },
-          lineManager: {
-            select: {
-              firstName: true,
-              lastName: true,
-            },
+    const employees = await prisma.employee.findMany({
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        selected: true,
+        status: true,
+        image: true,
+        job: { select: { title: true } },
+        department: { select: { name: true } },
+        office: { select: { name: true } },
+        lineManager: {
+          select: {
+            firstName: true,
+            lastName: true,
           },
         },
-        where: {
-          AND: [
-            {
-              OR: [
-                { firstName: { contains: query, mode: "insensitive" } },
-                { lastName: { contains: query, mode: "insensitive" } },
-                {
-                  department: {
-                    name: { contains: query, mode: "insensitive" },
-                  },
+      },
+      where: {
+        AND: [
+          {
+            OR: [
+              { firstName: { contains: query, mode: "insensitive" } },
+              { lastName: { contains: query, mode: "insensitive" } },
+              {
+                department: {
+                  name: { contains: query, mode: "insensitive" },
                 },
-              ],
-            },
-            status ? { status: { equals: employeeStatus } } : {},
-            job
-              ? { job: { title: { equals: employeeJob, mode: "insensitive" } } }
-              : {},
-            office
-              ? {
-                  office: {
-                    name: { equals: employeeOffice, mode: "insensitive" },
-                  },
-                }
-              : {},
-          ],
-        },
-        take: PAGE_SIZE,
-        skip: offset,
-      }),
-      prisma.employee.count({
-        where: {
-          AND: [
-            {
-              OR: [
-                { firstName: { contains: query, mode: "insensitive" } },
-                { lastName: { contains: query, mode: "insensitive" } },
-                {
-                  department: {
-                    name: { contains: query, mode: "insensitive" },
-                  },
+              },
+            ],
+          },
+          status ? { status: { equals: employeeStatus } } : {},
+          job
+            ? { job: { title: { equals: employeeJob, mode: "insensitive" } } }
+            : {},
+          office
+            ? {
+                office: {
+                  name: { equals: employeeOffice, mode: "insensitive" },
                 },
-              ],
-            },
-            status ? { status: { equals: employeeStatus } } : {},
-            job
-              ? { job: { title: { equals: employeeJob, mode: "insensitive" } } }
-              : {},
-            office
-              ? {
-                  office: {
-                    name: { equals: employeeOffice, mode: "insensitive" },
-                  },
-                }
-              : {},
-          ],
-        },
-      }),
-    ]);
+              }
+            : {},
+        ],
+      },
+      take: PAGE_SIZE,
+      skip: offset,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
-    return { employees, count };
+    return employees;
   } catch (error) {
     throw new Error("Failed to fetch the Employees");
+  } finally {
+    await prisma.$disconnect();
   }
 }
 
@@ -161,5 +136,7 @@ export async function getEmployeePages({
     return count;
   } catch (error) {
     throw new Error("Failed to fetch the Employees Count");
+  } finally {
+    await prisma.$disconnect();
   }
 }

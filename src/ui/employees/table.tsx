@@ -5,15 +5,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import TablePagination from "@mui/material/TablePagination";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import Pagination from "./pagination";
 import Actions from "@/ui/actions";
 import Status from "@/ui/status";
 
@@ -33,7 +30,7 @@ export default async function EmployeeTable({
   status: string;
   currentPage: number;
 }) {
-  const { employees, count } = await getFilteredEmployees({
+  const employees = await getFilteredEmployees({
     query,
     status,
     office,
@@ -47,15 +44,6 @@ export default async function EmployeeTable({
         <MuiTable>
           <TableHead>
             <TableRow>
-              <TableCell>
-                <Checkbox
-                // indeterminate={
-                //   !allSelected && newData.some((row) => row.selected)
-                // }
-                // checked={allSelected}
-                // onChange={handleToggleSelectAll}
-                />
-              </TableCell>
               {columns.map((column: any) => (
                 <TableCell
                   sx={{ color: "#687588", fontWeight: 700 }}
@@ -71,8 +59,8 @@ export default async function EmployeeTable({
                 </TableCell>
               ))}
               <TableCell
-                sx={{ color: "#687588", fontWeight: 700 }}
                 align="center"
+                sx={{ color: "#687588", fontWeight: 700 }}
               >
                 Action
               </TableCell>
@@ -81,17 +69,10 @@ export default async function EmployeeTable({
           <TableBody>
             {employees?.map((employee: any) => (
               <TableRow key={employee.id}>
-                <TableCell>
-                  <Checkbox
-                    checked={employee.selected}
-                    // onChange={() => handleToggleSelect(row.id)}
-                  />
-                </TableCell>
-
                 <TableCell align="left">
                   {
                     <Stack direction="row" spacing={1}>
-                      <Avatar src={employee.image} />
+                      <Avatar src={employee?.image} />
                       <Box>
                         <Typography variant="body2" sx={{ fontWeight: 700 }}>
                           {employee.firstName} {employee.lastName}
@@ -107,15 +88,15 @@ export default async function EmployeeTable({
                     </Stack>
                   }
                 </TableCell>
-                <TableCell>{employee?.job.title}</TableCell>
+                <TableCell>{employee?.job?.title || "-"}</TableCell>
                 <TableCell>{employee?.lineManager?.firstName || "-"}</TableCell>
-                <TableCell>{employee.department.name}</TableCell>
-                <TableCell>{employee.office.name}</TableCell>
+                <TableCell>{employee?.department?.name || "-"}</TableCell>
+                <TableCell>{employee?.office?.name || "-"}</TableCell>
                 <TableCell align="center">
-                  <Status status={employee.status} />
+                  <Status status={employee?.status} />
                 </TableCell>
 
-                <TableCell align="center">
+                <TableCell align="right">
                   <Actions />
                 </TableCell>
               </TableRow>

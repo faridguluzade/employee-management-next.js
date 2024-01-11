@@ -20,6 +20,8 @@ export default function Pagination({
     createQueryString("page", value.toString());
   };
 
+  if (pageCount <= 1) return null;
+
   return (
     <MuiPagination
       count={pageCount}
