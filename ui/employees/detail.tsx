@@ -18,7 +18,7 @@ import EmployeeOverview from "./overview";
 import Heading from "@/ui/heading";
 import TabPanel from "@/ui/tab-panel";
 
-import { LeftIcon, EditIcon2 } from "../../../public/assets/icons";
+import { LeftIcon, EditIcon2 } from "@/public/assets/icons";
 import { grey } from "@mui/material/colors";
 
 function a11yProps(index: number) {

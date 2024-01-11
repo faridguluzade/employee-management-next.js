@@ -72,7 +72,7 @@ function CreateButton() {
       color="greyScale"
       variant="contained"
       sx={{ flex: 1 }}
-      aria-disabled={pending}
+      disabled={pending}
     >
       {pending ? "Creating..." : "Create"}
     </Button>

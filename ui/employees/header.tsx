@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Heading from "@/ui/heading";
 import AddEmployee from "./create-employee";
 
-import { PlusIcon } from "../../../public/assets/icons";
+import { PlusIcon } from "@/public/assets/icons";
 import { useSidebar } from "@/context/SidebarContext";
 
 function Header() {

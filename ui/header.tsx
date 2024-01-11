@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Avatar from "@mui/material/Avatar";
 
-import { MessageIcon } from "../../public/assets/icons";
+import { MessageIcon } from "@/public/assets/icons";
 
 function Header() {
   return (

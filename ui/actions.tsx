@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-import { EditIcon, EyeIcon, TrashIcon } from "../../public/assets/icons";
+import { EditIcon, EyeIcon, TrashIcon } from "@/public/assets/icons";
 
 function Actions() {
   return (

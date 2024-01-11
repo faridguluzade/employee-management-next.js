@@ -2,7 +2,7 @@
 
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import { SearchIcon } from "../../../public/assets/icons";
+import { SearchIcon } from "@/public/assets/icons";
 import { useQueryString } from "@/hooks/useQueryString";
 
 function Search({ label }: { label: string }) {

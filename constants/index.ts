@@ -5,7 +5,7 @@ import {
   TimerIcon,
   CalendarIcon,
   TrendingUpIcon,
-} from "../../public/assets/icons";
+} from "@/public/assets/icons";
 
 type MenuItem = {
   text: string;

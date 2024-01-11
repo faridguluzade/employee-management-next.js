@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import Status from "@/ui/status";
 
-import { GlobalIcon, MailIcon, PhoneIcon } from "../../../public/assets/icons";
+import { GlobalIcon, MailIcon, PhoneIcon } from "@/public/assets/icons";
 
 function EmployeeOverview() {
   return (

@@ -14,7 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-import { EyeIcon, TrashIcon, EditIcon } from "../../public/assets/icons";
+import { EyeIcon, TrashIcon, EditIcon } from "@/public/assets/icons";
 
 interface Data {
   id: number;

@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 
-import { EmployeeIcon, LayoutGridIcon } from "../../public/assets/icons";
+import { EmployeeIcon, LayoutGridIcon } from "@/public/assets/icons";
 import { menuItems } from "@/constants";
 import { useState } from "react";
 
